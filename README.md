@@ -188,3 +188,4 @@ See [SECURITY.md](SECURITY.md) for our vulnerability disclosure process.
 ## License
 
 [MIT](LICENSE.txt) — Copyright 2026 lemonbrain GmbH
+
