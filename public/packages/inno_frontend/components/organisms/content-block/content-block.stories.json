@@ -1,0 +1,23 @@
+{
+  "title": "Organisms/Content Block",
+  "argTypes": {
+    "content": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Plain Text", "parameters": { "server": { "id": "organisms/content-block" } } },
+    {
+      "name": "With Accent Quote",
+      "args": {
+        "content": "<p>Unser Motto:</p><span class=\"accent\">Die Innovationsbox stellt digitale Räume zur Verfügung, in welchen sich innovative Entwicklerinnen mit anderen Menschen treffen können, um klimafreundliche Ideen gemeinsam zu entwickeln und zum Erfolg zu bringen.</span>"
+      },
+      "parameters": { "server": { "id": "organisms/content-block" } }
+    },
+    {
+      "name": "With FAQ Question",
+      "args": {
+        "content": "<span class=\"question\">Welche Projektideen werden in dieser Box bearbeitet?</span><p>Es dürfen alle Projektideen eingereicht werden, welche dem Klimaschutz helfen.</p>"
+      },
+      "parameters": { "server": { "id": "organisms/content-block" } }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+// Empty — fonts are loaded via @font-face in the theme's page_theme.php
+// This avoids webpack processing font URLs, which produces paths that
+// don't match the CMS package URL structure.
+// The actual @font-face declarations are in:
+// - CMS: themes/innovationsbox/elements/header_top.php (inline style)
+// - Storybook: .storybook/preview-head.html

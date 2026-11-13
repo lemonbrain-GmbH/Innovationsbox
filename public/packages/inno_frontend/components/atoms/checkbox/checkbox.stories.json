@@ -1,0 +1,26 @@
+{
+  "title": "Atoms/Checkbox",
+  "argTypes": {
+    "id": { "control": "text" },
+    "name": { "control": "text" },
+    "value": { "control": "text" },
+    "label": { "control": "text" },
+    "checked": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "required": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "invalid": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "describedBy": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Unchecked", "parameters": { "server": { "id": "atoms/checkbox" } } },
+    { "name": "Checked", "args": { "checked": "true" }, "parameters": { "server": { "id": "atoms/checkbox" } } },
+    { "name": "Disabled", "args": { "disabled": "true" }, "parameters": { "server": { "id": "atoms/checkbox" } } },
+    {
+      "name": "Disabled Checked",
+      "args": { "disabled": "true", "checked": "true" },
+      "parameters": { "server": { "id": "atoms/checkbox" } }
+    },
+    { "name": "Invalid", "args": { "invalid": "true" }, "parameters": { "server": { "id": "atoms/checkbox" } } },
+    { "name": "Required", "args": { "required": "true" }, "parameters": { "server": { "id": "atoms/checkbox" } } }
+  ]
+}

@@ -1,0 +1,438 @@
+options:
+  max-time: 30
+
+image: atlassian/default-image:4
+
+definitions:
+  caches:
+    npm-cache:
+      key:
+        files:
+          - package-lock.json
+      path: node_modules
+    composer-cache:
+      key:
+        files:
+          - composer.lock
+      path: vendor
+
+pipelines:
+  pull-requests:
+    "**":
+      - step:
+          name: "Stage 1: Lint & Format"
+          image: php:8.3-cli
+          caches:
+            - npm-cache
+            - composer-cache
+          script:
+            - export COMPOSER_ALLOW_SUPERUSER=1
+
+            # Install system dependencies
+            - apt-get update && apt-get install -y git unzip curl libzip-dev libpng-dev libjpeg-dev libfreetype-dev libicu-dev
+            - docker-php-ext-configure gd --with-freetype --with-jpeg
+            - docker-php-ext-install zip gd intl pdo_mysql
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+            # Install Node.js 20
+            - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+            - apt-get install -y nodejs
+
+            - npm ci
+            - composer install --no-interaction --no-progress --ignore-platform-req=php
+            - npm run lint
+            - npm run format
+            - npm run lint:scss
+            - composer lint:php
+
+            # OpenAPI spec staleness check
+            - composer openapi:generate
+            - 'git diff --exit-code docs/api/openapi.yaml docs/api/openapi.json || (echo "ERROR: OpenAPI spec is stale. Run composer openapi:generate and commit." && exit 1)'
+
+            # Markdown link check
+            - npx markdown-link-check README.md CONTRIBUTING.md TESTING.md SECURITY.md --quiet || true
+
+      - step:
+          name: "Stage 2: Type Check"
+          caches:
+            - npm-cache
+          script:
+            - npm ci
+            - npm run typecheck
+
+      - step:
+          name: "Stage 3: Test & Coverage"
+          image: php:8.3-cli
+          caches:
+            - npm-cache
+            - composer-cache
+          script:
+            - export COMPOSER_ALLOW_SUPERUSER=1
+
+            # Install system dependencies
+            - apt-get update && apt-get install -y git unzip curl libzip-dev libpng-dev libjpeg-dev libfreetype-dev libicu-dev
+            - docker-php-ext-configure gd --with-freetype --with-jpeg
+            - docker-php-ext-install zip pcntl gd intl pdo_mysql
+            - pecl install pcov && docker-php-ext-enable pcov
+
+            # Install Node.js 20
+            - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+            - apt-get install -y nodejs
+
+            # Install Composer
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+            # Install dependencies
+            - npm ci
+            - composer install --no-interaction --no-progress --ignore-platform-req=php
+
+            # PHP Unit Tests with Coverage (80% minimum)
+            - ./vendor/bin/pest --testsuite=Unit --coverage --min=80
+
+            # Asset Build Check
+            - npm run tokens
+            - npm run production
+
+            # Storybook Smoke Tests
+            - npx playwright install --with-deps chromium
+            - npm run storybook:build
+            - php -S localhost:6007 storybook-server/index.php &
+            - sleep 2
+            - npx playwright test tests/e2e/specs/storybook/ --config=tests/e2e/playwright.config.ts --reporter=line
+
+      - step:
+          name: "Stage 4: Security"
+          image: php:8.3-cli
+          caches:
+            - npm-cache
+            - composer-cache
+          script:
+            - export COMPOSER_ALLOW_SUPERUSER=1
+
+            # Install system dependencies
+            - apt-get update && apt-get install -y git unzip curl libzip-dev libpng-dev libjpeg-dev libfreetype-dev libicu-dev python3-pip
+            - docker-php-ext-configure gd --with-freetype --with-jpeg
+            - docker-php-ext-install zip gd intl pdo_mysql
+            - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+            # Install Node.js 20
+            - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+            - apt-get install -y nodejs
+
+            - npm ci
+            - composer install --no-interaction --no-progress --ignore-platform-req=php
+
+            # Dependency vulnerability scanning
+            - echo "=== npm audit ==="
+            - npx better-npm-audit audit --level high
+            - echo "=== composer audit ==="
+            # 33 known advisories (symfony/*, guzzlehttp/guzzle, enshrined/svg-sanitize, phpseclib, league/flysystem) are constrained by Concrete CMS core — update KNOWN_ADVISORY_COUNT when resolved
+            - KNOWN_ADVISORY_COUNT=33; COUNT=$(composer audit --abandoned=ignore --format=json 2>/dev/null | grep -o '"advisoryId"' | wc -l); echo "Found $COUNT advisories ($KNOWN_ADVISORY_COUNT known/accepted)"; if [ "$COUNT" -gt "$KNOWN_ADVISORY_COUNT" ]; then composer audit --abandoned=ignore; exit 1; fi
+
+            # SAST (static analysis)
+            - echo "=== semgrep ==="
+            - pip3 install --break-system-packages semgrep
+            - semgrep --config=auto --error resources/js/ public/packages/inno_*/src/ storybook-server/
+
+      - step:
+          name: "Stage 5: E2E & Integration Tests"
+          size: 2x
+          caches:
+            - npm-cache
+            - docker
+          services:
+            - docker
+          script:
+            # Install docker-compose (v2 standalone) — Bitbucket runner only ships the legacy Docker CLI
+            - curl -fsSL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64" -o /usr/local/bin/docker-compose
+            - chmod +x /usr/local/bin/docker-compose
+
+            # Build and start the test environment
+            - docker-compose -f docker-compose.test.yml up -d --build --wait
+
+            # Run integration tests inside the container
+            - docker-compose -f docker-compose.test.yml exec -T app ./vendor/bin/pest --configuration=phpunit.integration.xml --testsuite=Integration
+
+            # Install Playwright and run E2E tests from the host
+            - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+            - apt-get install -y nodejs
+            - npm ci
+            - npx playwright install --with-deps chromium
+            - E2E_DOCKER=true npx playwright test --config=tests/e2e/playwright.config.ts --project=e2e --reporter=line --workers=1
+
+            # Tear down
+            - docker-compose -f docker-compose.test.yml down -v
+
+  tags:
+    "*":
+      - parallel:
+        - step:
+            name: "push inno_frontend (tag)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - npm ci
+              - npm run production
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_FRONTEND_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_FRONTEND_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_frontend.git
+              - git fetch origin
+              - git checkout -t origin/main || echo "Warning, unable to checkout origin/main, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_frontend/* .
+              - git add .
+              - git commit -m "tag $BITBUCKET_TAG created by pipeline"
+              - git push origin main
+              - git tag $BITBUCKET_TAG
+              - git push --tags
+        - step:
+            name: "push inno_moderation (tag)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_MODERATION_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_MODERATION_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_moderation.git
+              - git fetch origin
+              - git checkout -t origin/main || echo "Warning, unable to checkout origin/main, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_moderation/* .
+              - git add .
+              - git commit -m "tag $BITBUCKET_TAG created by pipeline"
+              - git push origin main
+              - git tag $BITBUCKET_TAG
+              - git push --tags
+        - step:
+            name: "push inno_notification (tag)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_NOTIFICATION_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_NOTIFICATION_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_notification.git
+              - git fetch origin
+              - git checkout -t origin/main || echo "Warning, unable to checkout origin/main, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_notification/* .
+              - git add .
+              - git commit -m "tag $BITBUCKET_TAG created by pipeline"
+              - git push origin main
+              - git tag $BITBUCKET_TAG
+              - git push --tags
+        - step:
+            name: "push inno_project_idea (tag)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_PROJECT_IDEA_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_PROJECT_IDEA_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_project_idea.git
+              - git fetch origin
+              - git checkout -t origin/main || echo "Warning, unable to checkout origin/main, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_project_idea/* .
+              - git add .
+              - git commit -m "tag $BITBUCKET_TAG created by pipeline"
+              - git push origin main
+              - git tag $BITBUCKET_TAG
+              - git push --tags
+        - step:
+            name: "push inno_project_space (tag)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_PROJECT_SPACE_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_PROJECT_SPACE_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_project_space.git
+              - git fetch origin
+              - git checkout -t origin/main || echo "Warning, unable to checkout origin/main, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_project_space/* .
+              - git add .
+              - git commit -m "tag $BITBUCKET_TAG created by pipeline"
+              - git push origin main
+              - git tag $BITBUCKET_TAG
+              - git push --tags
+        - step:
+            name: "push inno_shared (tag)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_SHARED_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_SHARED_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_shared.git
+              - git fetch origin
+              - git checkout -t origin/main || echo "Warning, unable to checkout origin/main, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_shared/* .
+              - git add .
+              - git commit -m "tag $BITBUCKET_TAG created by pipeline"
+              - git push origin main
+              - git tag $BITBUCKET_TAG
+              - git push --tags
+
+  branches:
+    staging:
+      - parallel:
+        - step:
+            name: "push inno_frontend (staging)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - npm ci
+              - npm run production
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_FRONTEND_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_FRONTEND_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_frontend.git
+              - git fetch origin
+              - git checkout -t origin/staging || echo "Warning, unable to checkout origin/staging, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_frontend/* .
+              - git checkout -B staging
+              - git add .
+              - git commit -m "staging version created by pipeline" --allow-empty
+              - git push origin staging
+        - step:
+            name: "push inno_moderation (staging)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_MODERATION_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_MODERATION_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_moderation.git
+              - git fetch origin
+              - git checkout -t origin/staging || echo "Warning, unable to checkout origin/staging, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_moderation/* .
+              - git checkout -B staging
+              - git add .
+              - git commit -m "staging version created by pipeline" --allow-empty
+              - git push origin staging
+        - step:
+            name: "push inno_notification (staging)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_NOTIFICATION_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_NOTIFICATION_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_notification.git
+              - git fetch origin
+              - git checkout -t origin/staging || echo "Warning, unable to checkout origin/staging, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_notification/* .
+              - git checkout -B staging
+              - git add .
+              - git commit -m "staging version created by pipeline" --allow-empty
+              - git push origin staging
+        - step:
+            name: "push inno_project_idea (staging)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_PROJECT_IDEA_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_PROJECT_IDEA_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_project_idea.git
+              - git fetch origin
+              - git checkout -t origin/staging || echo "Warning, unable to checkout origin/staging, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_project_idea/* .
+              - git checkout -B staging
+              - git add .
+              - git commit -m "staging version created by pipeline" --allow-empty
+              - git push origin staging
+        - step:
+            name: "push inno_project_space (staging)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_PROJECT_SPACE_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_PROJECT_SPACE_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_project_space.git
+              - git fetch origin
+              - git checkout -t origin/staging || echo "Warning, unable to checkout origin/staging, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_project_space/* .
+              - git checkout -B staging
+              - git add .
+              - git commit -m "staging version created by pipeline" --allow-empty
+              - git push origin staging
+        - step:
+            name: "push inno_shared (staging)"
+            script:
+              - rm -rf .git
+              - rm -rf public/packages/temp && mkdir public/packages/temp
+              - cd public/packages/temp
+              - git config --global init.defaultBranch main
+              - git init
+              - git config user.name bitbucket-pipelines
+              - git config user.email $INNO_SHARED_EMAIL
+              - git remote add origin https://x-token-auth:$INNO_SHARED_AUTH_TOKEN@bitbucket.org/externelemonbrain/inno_shared.git
+              - git fetch origin
+              - git checkout -t origin/staging || echo "Warning, unable to checkout origin/staging, probably because repository is empty."
+              - rm -rf ./*
+              - cp -r ../inno_shared/* .
+              - git checkout -B staging
+              - git add .
+              - git commit -m "staging version created by pipeline" --allow-empty
+              - git push origin staging
+
+  schedules:
+    - cron: "0 8 * * 1"
+      step:
+        name: "Weekly dependency report"
+        image: php:8.3-cli
+        caches:
+          - npm-cache
+          - composer-cache
+        script:
+          - export COMPOSER_ALLOW_SUPERUSER=1
+
+          # Install system dependencies
+          - apt-get update && apt-get install -y git unzip curl libzip-dev libpng-dev libjpeg-dev libfreetype-dev libicu-dev
+          - docker-php-ext-configure gd --with-freetype --with-jpeg
+          - docker-php-ext-install zip gd intl pdo_mysql
+          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+          # Install Node.js 20
+          - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+          - apt-get install -y nodejs
+
+          - npm install --ignore-scripts
+          - echo "=== npm outdated ==="
+          - npm outdated || true
+          - echo "=== composer outdated ==="
+          - composer install --no-interaction --no-progress --ignore-platform-req=php 2>/dev/null || true
+          - composer outdated --direct || true

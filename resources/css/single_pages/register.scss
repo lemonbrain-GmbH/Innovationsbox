@@ -1,0 +1,8 @@
+// Register page styles.
+// Auth-card component styles are in the component SCSS.
+// This file handles register-specific overrides.
+
+// CMS attribute rendering may output unstyled elements.
+.ccm-attribute {
+  margin-bottom: var(--space-4);
+}

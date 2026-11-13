@@ -1,0 +1,4 @@
+{
+  "title": "Tokens/Colors/Semantic",
+  "stories": [{ "name": "Semantic Aliases", "parameters": { "server": { "id": "atoms/_tokens/colors-semantic" } } }]
+}

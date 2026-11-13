@@ -1,0 +1,48 @@
+// Accessibility utilities — mixins for focus, motion, touch targets.
+
+// Focus-visible ring using semantic token. Only shows on keyboard focus.
+@mixin focus-visible-ring {
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+// Wrap animations/transitions so they respect prefers-reduced-motion.
+// Usage:
+//   @include respect-motion {
+//     transition: background-color var(--duration-normal) var(--ease-standard);
+//   }
+@mixin respect-motion {
+  @content;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+// Ensure minimum 44x44 touch target for small interactive elements.
+@mixin touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  position: relative;
+}
+
+// Global safety rule: suppress all non-essential animation for users
+// who prefer reduced motion.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

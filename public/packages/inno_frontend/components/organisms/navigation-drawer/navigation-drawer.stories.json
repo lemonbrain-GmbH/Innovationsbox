@@ -1,0 +1,9 @@
+{
+  "title": "Organisms/Navigation Drawer",
+  "argTypes": {
+    "logoSrc": { "control": "text" },
+    "logoAlt": { "control": "text" },
+    "logoHref": { "control": "text" }
+  },
+  "stories": [{ "name": "Default", "parameters": { "server": { "id": "organisms/navigation-drawer" } } }]
+}

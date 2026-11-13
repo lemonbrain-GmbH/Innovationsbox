@@ -1,0 +1,102 @@
+@use "~@helpers/a11y" as a11y;
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+  &__trigger {
+    cursor: help;
+
+    @include a11y.focus-visible-ring;
+  }
+
+  &__bubble {
+    position: absolute;
+    z-index: var(--z-tooltip);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-bg-emphasis);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-sm);
+    font-family: var(--text-font-family);
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+
+    @include a11y.respect-motion {
+      transition: opacity var(--duration-fast) var(--ease-standard);
+    }
+  }
+
+  &:hover .tooltip__bubble,
+  &:focus-within .tooltip__bubble {
+    opacity: 1;
+  }
+
+  // Positions
+  &--top .tooltip__bubble {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: var(--space-2);
+  }
+
+  &--bottom .tooltip__bubble {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: var(--space-2);
+  }
+
+  &--left .tooltip__bubble {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: var(--space-2);
+  }
+
+  &--right .tooltip__bubble {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: var(--space-2);
+  }
+
+  // Arrow
+  &__bubble::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 4px solid transparent;
+  }
+
+  &--top .tooltip__bubble::before {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: var(--color-bg-emphasis);
+  }
+
+  &--bottom .tooltip__bubble::before {
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-color: var(--color-bg-emphasis);
+  }
+
+  &--left .tooltip__bubble::before {
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left-color: var(--color-bg-emphasis);
+  }
+
+  &--right .tooltip__bubble::before {
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-right-color: var(--color-bg-emphasis);
+  }
+}

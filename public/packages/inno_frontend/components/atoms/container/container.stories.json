@@ -1,0 +1,14 @@
+{
+  "title": "Atoms/Container",
+  "argTypes": {
+    "variant": { "control": { "type": "select" }, "options": ["default", "medium", "small", "narrow"] },
+    "spaced": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "content": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/container" } } },
+    { "name": "Medium", "args": { "variant": "medium" }, "parameters": { "server": { "id": "atoms/container" } } },
+    { "name": "Narrow", "args": { "variant": "narrow" }, "parameters": { "server": { "id": "atoms/container" } } },
+    { "name": "Spaced", "args": { "spaced": "true" }, "parameters": { "server": { "id": "atoms/container" } } }
+  ]
+}

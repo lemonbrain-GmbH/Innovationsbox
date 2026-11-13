@@ -1,0 +1,14 @@
+{
+  "title": "Organisms/Collaboard Panel",
+  "argTypes": {
+    "canManage": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "With Boards", "parameters": { "server": { "id": "organisms/collaboard-panel" } } },
+    {
+      "name": "Read Only",
+      "args": { "canManage": "false" },
+      "parameters": { "server": { "id": "organisms/collaboard-panel" } }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+@use "~@helpers/functions" as f;
+
+// Atom: Overlay
+.overlay {
+  border-radius: var(--border-radius);
+  padding: f.fluidVal(16, 32);
+  backdrop-filter: blur(32px);
+
+  &--light {
+    background-color: var(--color-light-overlay);
+    color: var(--color-black);
+  }
+
+  &--dark {
+    background-color: var(--color-overlay);
+    color: var(--color-white);
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Molecules/User Menu",
+  "argTypes": {
+    "userName": { "control": "text" },
+    "userEmail": { "control": "text" },
+    "userInitials": { "control": "text" },
+    "avatarUrl": { "control": "text" },
+    "editProfileUrl": { "control": "text" },
+    "logoutUrl": { "control": "text" },
+    "isOpen": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Closed", "parameters": { "server": { "id": "molecules/user-menu" } } },
+    {
+      "name": "Open",
+      "args": { "isOpen": "true" },
+      "parameters": { "server": { "id": "molecules/user-menu" } }
+    },
+    {
+      "name": "Initials Only",
+      "args": { "avatarUrl": "", "isOpen": "true" },
+      "parameters": { "server": { "id": "molecules/user-menu" } }
+    },
+    {
+      "name": "With Avatar",
+      "args": { "isOpen": "true" },
+      "parameters": { "server": { "id": "molecules/user-menu" } }
+    }
+  ]
+}

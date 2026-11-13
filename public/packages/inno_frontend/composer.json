@@ -1,0 +1,28 @@
+{
+  "name": "concrete5/inno_frontend",
+  "description": "Frontend theme and UI components for Innovationsbox",
+  "type": "concrete5-package",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.lemonbrain.ch"
+    }
+  ],
+  "require": {
+    "concrete5/core": "^9.5",
+    "concrete5/block_developer": "^1.4.4",
+    "concrete5/lemonbrain_services": "^5.0.13",
+    "concrete5/inno_moderation": "self.version",
+    "concrete5/inno_notification": "self.version",
+    "concrete5/inno_project_idea": "self.version",
+    "concrete5/inno_project_space": "self.version",
+    "concrete5/inno_shared": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "Custom\\Space\\": "src"
+    }
+  }
+}

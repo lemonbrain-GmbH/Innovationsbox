@@ -1,0 +1,169 @@
+@use "~@helpers/functions" as f;
+
+.user-menu {
+  position: relative;
+
+  // Open on hover
+  &:hover .user-menu__dropdown,
+  &--open .user-menu__dropdown {
+    display: block;
+  }
+
+  &__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: var(--radius-full);
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-action-focus);
+      outline-offset: 2px;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: var(--radius-full);
+    background: var(--color-status-error-600);
+    color: var(--color-white);
+    font-size: 11px;
+    font-weight: var(--font-weight-bold);
+    line-height: 18px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  &__item-badge {
+    margin-left: auto;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-status-error-600);
+    color: var(--color-white);
+    font-size: 11px;
+    font-weight: var(--font-weight-bold);
+    line-height: 20px;
+    text-align: center;
+  }
+
+  &__dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    padding-top: var(--space-2);
+    min-width: 240px;
+    z-index: 1100;
+
+    // Inner card with background/border so the padding-top gap is invisible
+    &::before {
+      content: "";
+      position: absolute;
+      top: var(--space-2);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-white);
+      border: 1px solid var(--color-neutral-200);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+    }
+  }
+
+  &__info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: calc(var(--space-3) + var(--space-2)) var(--space-4) var(--space-3);
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: f.fluidVal(18, 24);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-900);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__email {
+    font-size: 12px;
+    color: var(--color-neutral-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__divider {
+    position: relative;
+    border: none;
+    border-top: 1px solid var(--color-neutral-200);
+    margin: var(--space-1) 0;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    color: var(--color-neutral-700);
+    text-decoration: none;
+    min-height: 44px;
+
+    &:hover {
+      background: var(--color-neutral-50);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-action-focus);
+      outline-offset: -2px;
+    }
+
+    &:last-child {
+      padding-bottom: var(--space-3);
+    }
+
+    &--danger {
+      color: var(--color-status-error-600);
+
+      &:hover {
+        background: var(--color-status-error-50);
+      }
+    }
+  }
+}
+
+// Override .ccm-page a:not(.button) global styles for user-menu items
+.ccm-page .user-menu__dropdown a {
+  text-decoration: none;
+  font-size: f.fluidVal(14, 16);
+  font-weight: var(--font-weight-regular);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.ccm-page .user-menu__name {
+  font-size: f.fluidVal(14, 16);
+}

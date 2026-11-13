@@ -1,0 +1,43 @@
+@use "~@helpers/functions" as f;
+@use "../../molecules/project-card/project-card";
+
+.innovation-teaser {
+  padding-top: f.fluidVal(32, 64);
+  padding-bottom: f.fluidVal(32, 64);
+
+  &__header {
+    margin-bottom: var(--space-4);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+
+    @media (width <= 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width <= 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    // On mobile (1 col), hide the 3rd card
+    @media (width <= 1024px) {
+      > :nth-child(n + 3) {
+        display: none;
+      }
+    }
+  }
+
+  &__loading {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-8);
+  }
+
+  &__footer {
+    margin-top: var(--space-6);
+  }
+}

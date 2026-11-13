@@ -1,0 +1,20 @@
+{
+  "title": "Molecules/Partner Logo",
+  "argTypes": {
+    "name": { "control": "text" },
+    "href": { "control": "text" },
+    "imageSrc": { "control": "text" }
+  },
+  "stories": [
+    { "name": "arento", "parameters": { "server": { "id": "molecules/partner-logo" } } },
+    {
+      "name": "KlimaGlarus",
+      "args": {
+        "name": "KlimaGlarus.ch",
+        "href": "https://www.klimaglarus.ch/",
+        "imageSrc": "https://dummyimage.com/120x60/ffffff/B7CD57.png&text=KlimaGlarus"
+      },
+      "parameters": { "server": { "id": "molecules/partner-logo" } }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Atoms/Textarea",
+  "argTypes": {
+    "id": { "control": "text" },
+    "name": { "control": "text" },
+    "value": { "control": "text" },
+    "placeholder": { "control": "text" },
+    "rows": { "control": { "type": "select" }, "options": ["2", "4", "6", "8"] },
+    "resize": { "control": { "type": "select" }, "options": ["none", "vertical", "horizontal", "both"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "required": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "invalid": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "describedBy": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/textarea" } } },
+    {
+      "name": "With Value",
+      "args": { "value": "Eine Solaranlage auf dem Schuldach in Glarus." },
+      "parameters": { "server": { "id": "atoms/textarea" } }
+    },
+    {
+      "name": "Disabled",
+      "args": { "disabled": "true", "value": "Schreibgeschützt" },
+      "parameters": { "server": { "id": "atoms/textarea" } }
+    },
+    {
+      "name": "Invalid",
+      "args": { "invalid": "true", "value": "Zu kurz" },
+      "parameters": { "server": { "id": "atoms/textarea" } }
+    }
+  ]
+}

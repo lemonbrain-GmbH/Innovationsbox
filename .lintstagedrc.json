@@ -1,0 +1,9 @@
+{
+  "resources/**/*.ts": ["eslint --fix", "prettier --write"],
+  "public/packages/inno_frontend/components/**/*.ts": ["prettier --write"],
+  "resources/**/*.{js,json}": ["prettier --write"],
+  "public/packages/inno_frontend/components/**/*.{js,json}": ["prettier --write"],
+  "resources/**/*.scss": ["stylelint --fix"],
+  "public/packages/inno_frontend/components/**/*.scss": ["stylelint --fix"],
+  "**/*.php": ["php-cs-fixer fix --config=.php-cs-fixer.dist.php"]
+}

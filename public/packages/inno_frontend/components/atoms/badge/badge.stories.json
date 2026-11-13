@@ -1,0 +1,47 @@
+{
+  "title": "Atoms/Badge",
+  "argTypes": {
+    "label": { "control": "text" },
+    "variant": {
+      "control": { "type": "select" },
+      "options": ["neutral", "primary", "success", "warning", "error", "info"]
+    },
+    "size": { "control": { "type": "select" }, "options": ["sm", "md"] },
+    "shape": { "control": { "type": "select" }, "options": ["rounded", "pill"] },
+    "icon": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Neutral", "parameters": { "server": { "id": "atoms/badge" } } },
+    {
+      "name": "Primary",
+      "args": { "variant": "primary", "label": "Aktiv" },
+      "parameters": { "server": { "id": "atoms/badge" } }
+    },
+    {
+      "name": "Success",
+      "args": { "variant": "success", "label": "Genehmigt" },
+      "parameters": { "server": { "id": "atoms/badge" } }
+    },
+    {
+      "name": "Warning",
+      "args": { "variant": "warning", "label": "Prüfung" },
+      "parameters": { "server": { "id": "atoms/badge" } }
+    },
+    {
+      "name": "Error",
+      "args": { "variant": "error", "label": "Abgelehnt" },
+      "parameters": { "server": { "id": "atoms/badge" } }
+    },
+    {
+      "name": "Info",
+      "args": { "variant": "info", "label": "Info" },
+      "parameters": { "server": { "id": "atoms/badge" } }
+    },
+    {
+      "name": "Pill",
+      "args": { "variant": "primary", "shape": "pill", "label": "3 neu" },
+      "parameters": { "server": { "id": "atoms/badge" } }
+    },
+    { "name": "Small", "args": { "size": "sm", "label": "SM" }, "parameters": { "server": { "id": "atoms/badge" } } }
+  ]
+}

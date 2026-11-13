@@ -1,0 +1,26 @@
+{
+  "title": "Molecules/Empty State",
+  "argTypes": {
+    "illustration": { "control": "text" },
+    "title": { "control": "text" },
+    "description": { "control": "text" },
+    "ctaLabel": { "control": "text" },
+    "ctaHref": { "control": "text" },
+    "size": { "control": { "type": "select" }, "options": ["sm", "md", "lg"] }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/empty-state" } } },
+    {
+      "name": "Without CTA",
+      "args": { "ctaLabel": "" },
+      "parameters": { "server": { "id": "molecules/empty-state" } }
+    },
+    {
+      "name": "Without Description",
+      "args": { "description": "" },
+      "parameters": { "server": { "id": "molecules/empty-state" } }
+    },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "molecules/empty-state" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "molecules/empty-state" } } }
+  ]
+}

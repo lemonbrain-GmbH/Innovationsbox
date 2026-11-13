@@ -1,0 +1,19 @@
+{
+  "title": "Molecules/Status Update Entry",
+  "argTypes": {
+    "title": { "control": "text" },
+    "body": { "control": "text" },
+    "authorName": { "control": "text" },
+    "createdAt": { "control": "text" },
+    "isLatest": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Latest", "parameters": { "server": { "id": "molecules/status-update-entry" } } },
+    {
+      "name": "Older",
+      "args": { "isLatest": "false" },
+      "parameters": { "server": { "id": "molecules/status-update-entry" } }
+    },
+    { "name": "No Body", "args": { "body": "" }, "parameters": { "server": { "id": "molecules/status-update-entry" } } }
+  ]
+}

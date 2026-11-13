@@ -1,0 +1,34 @@
+{
+  "title": "Molecules/Pagination",
+  "argTypes": {
+    "currentPage": { "control": "text" },
+    "totalPages": { "control": "text" },
+    "baseUrl": { "control": "text" },
+    "pageParam": { "control": "text" },
+    "siblingCount": { "control": "text" },
+    "ariaLabel": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Middle", "parameters": { "server": { "id": "molecules/pagination" } } },
+    {
+      "name": "First Page",
+      "args": { "currentPage": "1" },
+      "parameters": { "server": { "id": "molecules/pagination" } }
+    },
+    {
+      "name": "Last Page",
+      "args": { "currentPage": "10" },
+      "parameters": { "server": { "id": "molecules/pagination" } }
+    },
+    {
+      "name": "Few Pages",
+      "args": { "currentPage": "2", "totalPages": "3" },
+      "parameters": { "server": { "id": "molecules/pagination" } }
+    },
+    {
+      "name": "Many Pages",
+      "args": { "currentPage": "50", "totalPages": "100" },
+      "parameters": { "server": { "id": "molecules/pagination" } }
+    }
+  ]
+}

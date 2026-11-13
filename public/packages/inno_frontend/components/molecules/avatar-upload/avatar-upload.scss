@@ -1,0 +1,25 @@
+@use "~@helpers/functions" as f;
+@use "~@global/_generated-arrays" as t;
+
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+
+  &__preview {
+    flex-shrink: 0;
+
+    .avatar--xl {
+      width: 96px;
+      height: 96px;
+
+      @include f.responsive-fluid("font-size", t.$text-2xl-font-sizes);
+    }
+  }
+
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+}

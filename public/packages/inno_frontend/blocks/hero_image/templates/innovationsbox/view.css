@@ -1,0 +1,30 @@
+.hero-image-wrapper {
+  position: relative;
+  margin-bottom: clamp(32px, 32px + 16 * (100vw - 1200px) / 480, 48px);
+}
+.hero-image-wrapper > .image {
+  width: 100vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.hero-image-wrapper .hero-image-text {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+  color: var(--color-white);
+  padding: clamp(20px, 20px + 20 * (100vw - 1200px) / 480, 40px) clamp(30px, 30px + 30 * (100vw - 1200px) / 480, 60px);
+  border-radius: var(--border-radius);
+  background-color: var(--color-light-overlay);
+  backdrop-filter: blur(32px);
+}
+@media screen and (max-width: 768px) {
+  .hero-image-wrapper .hero-image-text {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    margin-top: -1rem;
+  }
+}

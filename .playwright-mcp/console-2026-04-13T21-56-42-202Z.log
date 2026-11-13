@@ -1,0 +1,2 @@
+[     784ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:6006/favicon.svg:0
+[     955ms] [ERROR] WebSocket connection to 'ws://localhost:6006/storybook-server-channel?token=ee2ca657-3406-4389-a14e-2bce9630446d' failed: Error during WebSocket handshake: Unexpected response code: 403 @ http://localhost:6006/sb-preview/runtime.js:3909

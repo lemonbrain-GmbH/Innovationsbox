@@ -1,0 +1,12 @@
+{
+  "title": "Molecules/Feature Button",
+  "argTypes": {
+    "label": { "control": "text" },
+    "href": { "control": "text" },
+    "icon": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/feature-button" } } },
+    { "name": "With Icon", "args": { "icon": "↓" }, "parameters": { "server": { "id": "molecules/feature-button" } } }
+  ]
+}

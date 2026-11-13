@@ -1,0 +1,49 @@
+@use "~@helpers/functions" as f;
+
+.page-list-wrapper {
+  .page-list-pages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: f.fluidVal(8, 16);
+
+    .page-link {
+      position: relative;
+      flex: 1 0 15%;
+      width: 30%;
+      filter: none;
+      transition:
+        filter var(--transition-time),
+        color var(--transition-time);
+
+      &:hover {
+        filter: sepia(100%);
+      }
+
+      .lb-img-wrapper,
+      .image {
+        border-radius: var(--border-radius-small);
+        overflow: hidden;
+      }
+
+      .page-link-text {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: f.fluidVal(8, 12);
+      }
+    }
+  }
+
+  @media screen and (max-width: #{f.$lowerBound-factor - 1}px) {
+    .page-list-pages .page-link {
+      flex: 0 0 30%;
+    }
+  }
+
+  @media screen and (max-width: #{f.$upperBoundTablet-factor - 1}px) {
+    .page-list-pages .page-link {
+      flex: 0 0 45%;
+    }
+  }
+}

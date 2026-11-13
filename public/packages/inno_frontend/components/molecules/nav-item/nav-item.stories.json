@@ -1,0 +1,13 @@
+{
+  "title": "Molecules/Nav Item",
+  "argTypes": {
+    "text": { "control": "text" },
+    "href": { "control": "text" },
+    "active": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "level": { "control": { "type": "select" }, "options": ["1", "2"] }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/nav-item" } } },
+    { "name": "Active", "args": { "active": "true" }, "parameters": { "server": { "id": "molecules/nav-item" } } }
+  ]
+}

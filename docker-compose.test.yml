@@ -1,0 +1,71 @@
+# Docker Compose for E2E and Integration testing.
+# Usage:
+#   docker compose -f docker-compose.test.yml up -d --wait
+#   docker compose -f docker-compose.test.yml exec app composer test:integration
+#   npx playwright test --config=tests/e2e/playwright.config.ts --project=e2e
+#   docker compose -f docker-compose.test.yml down -v
+#
+# Optional local overrides (e.g. mount local files dir):
+#   cp docker-compose.test.override.example.yml docker-compose.test.override.yml
+#   docker compose -f docker-compose.test.yml -f docker-compose.test.override.yml up -d --wait
+
+services:
+  db:
+    image: mysql:8.0
+    command: >-
+      --default-authentication-plugin=mysql_native_password
+      --skip-ssl
+      --innodb-buffer-pool-size=64M
+      --innodb-log-file-size=16M
+      --max-connections=30
+      --performance-schema=OFF
+    environment:
+      MYSQL_ROOT_PASSWORD: root_e2e_password
+      MYSQL_DATABASE: innovationsbox_test
+      MYSQL_USER: innovationsbox_test
+      MYSQL_PASSWORD: test_password_e2e
+    ports:
+      - "13306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_e2e_password"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    tmpfs:
+      - /var/lib/mysql
+    mem_limit: 512m
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8025/api/v1/info"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    mem_limit: 128m
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    env_file:
+      - docker/test.env
+    environment:
+      PHP_MEMORY_LIMIT: 256M
+    ports:
+      - "8880:80"
+    depends_on:
+      db:
+        condition: service_healthy
+      mailpit:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 120s
+    mem_limit: 1g

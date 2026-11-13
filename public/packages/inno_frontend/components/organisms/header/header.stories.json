@@ -1,0 +1,42 @@
+{
+  "title": "Organisms/Header",
+  "argTypes": {
+    "logoSrc": { "control": "text" },
+    "logoAlt": { "control": "text" },
+    "logoHref": { "control": "text" },
+    "authState": {
+      "control": { "type": "select" },
+      "options": ["logged-out", "logged-in"]
+    },
+    "userName": { "control": "text" },
+    "userEmail": { "control": "text" },
+    "userInitials": { "control": "text" },
+    "avatarUrl": { "control": "text" },
+    "editProfileUrl": { "control": "text" },
+    "logoutUrl": { "control": "text" }
+  },
+  "stories": [
+    {
+      "name": "Default",
+      "parameters": { "server": { "id": "organisms/header" } }
+    },
+    {
+      "name": "Logged Out",
+      "args": { "authState": "logged-out" },
+      "parameters": { "server": { "id": "organisms/header" } }
+    },
+    {
+      "name": "Logged In",
+      "args": { "authState": "logged-in" },
+      "parameters": { "server": { "id": "organisms/header" } }
+    },
+    {
+      "name": "Logged In (Avatar)",
+      "args": {
+        "authState": "logged-in",
+        "avatarUrl": "https://i.pravatar.cc/150?u=marco"
+      },
+      "parameters": { "server": { "id": "organisms/header" } }
+    }
+  ]
+}

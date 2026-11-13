@@ -1,0 +1,13 @@
+{
+  "title": "Atoms/Divider",
+  "argTypes": {
+    "orientation": { "control": { "type": "select" }, "options": ["horizontal", "vertical"] },
+    "variant": { "control": { "type": "select" }, "options": ["solid", "dashed"] },
+    "label": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Solid", "parameters": { "server": { "id": "atoms/divider" } } },
+    { "name": "Dashed", "args": { "variant": "dashed" }, "parameters": { "server": { "id": "atoms/divider" } } },
+    { "name": "With Label", "args": { "label": "oder" }, "parameters": { "server": { "id": "atoms/divider" } } }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Atoms/Paragraph",
+  "argTypes": {
+    "variant": { "control": { "type": "select" }, "options": ["body", "lead", "small", "muted", "inverse"] },
+    "text": { "control": "text" },
+    "id": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Body", "parameters": { "server": { "id": "atoms/paragraph" } } },
+    { "name": "Lead", "args": { "variant": "lead" }, "parameters": { "server": { "id": "atoms/paragraph" } } },
+    { "name": "Small", "args": { "variant": "small" }, "parameters": { "server": { "id": "atoms/paragraph" } } },
+    { "name": "Muted", "args": { "variant": "muted" }, "parameters": { "server": { "id": "atoms/paragraph" } } }
+  ]
+}

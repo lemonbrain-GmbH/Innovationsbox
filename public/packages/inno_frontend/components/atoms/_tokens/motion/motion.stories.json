@@ -1,0 +1,4 @@
+{
+  "title": "Tokens/Motion",
+  "stories": [{ "name": "Duration & Easing", "parameters": { "server": { "id": "atoms/_tokens/motion" } } }]
+}

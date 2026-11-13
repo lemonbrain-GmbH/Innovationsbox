@@ -1,0 +1,63 @@
+@use "~@helpers/a11y" as a11y;
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  flex-shrink: 0;
+
+  &--xs {
+    width: 12px;
+    height: 12px;
+  }
+
+  &--sm {
+    width: 16px;
+    height: 16px;
+  }
+
+  &--md {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--lg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &--xl {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__svg {
+    width: 100%;
+    height: 100%;
+
+    @include a11y.respect-motion {
+      animation: spinner-rotate 1s linear infinite;
+    }
+  }
+
+  &__track {
+    stroke: currentcolor;
+    stroke-width: 2;
+    fill: none;
+    opacity: 0.2;
+  }
+
+  &__arc {
+    stroke: currentcolor;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-dasharray: 62.8;
+    stroke-dashoffset: 47.1;
+  }
+}
+
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}

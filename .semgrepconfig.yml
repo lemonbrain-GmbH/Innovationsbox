@@ -1,0 +1,4 @@
+# Semgrep SAST configuration
+# Using --config=auto in CI, which fetches community rules.
+# This file exists as a placeholder for future custom rules.
+rules: []
