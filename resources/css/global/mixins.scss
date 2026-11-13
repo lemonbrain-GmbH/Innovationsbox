@@ -1,0 +1,65 @@
+@use "../helper/functions" as f;
+
+.lb-container,
+.lb-container-narrow {
+  --container-width-mobile: 89vw;
+  --container-width-md: 80vw;
+}
+
+.lb-container {
+  --container-max-width: #{f.$containerMaxWidth};
+  --container-width: 85vw;
+  --container-width-mobile: 89vw;
+
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--container-max-width);
+  width: var(--container-width);
+
+  @media (max-width: #{f.$upperBoundMobile-factor}px) {
+    width: var(--container-width-mobile);
+  }
+
+  &.medium {
+    --container-max-width: #{f.$containerMediumWidth};
+
+    // maybe change this as well
+    // --container-width: 85vw;
+    --container-width-mobile: 89vw;
+  }
+
+  &.small {
+    --container-max-width: #{f.$containerSmallWidth};
+
+    // maybe change this as well
+    // --container-width: 85vw;
+    --container-width-mobile: 92vw;
+  }
+}
+
+.lb-container-narrow {
+  --narrow-container-width: 57vw;
+
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  max-width: var(--narrow-container-width);
+  width: var(--narrow-container-width);
+
+  @media (max-width: #{f.$upperBound-factor}px) {
+    width: var(--container-width-md);
+    max-width: var(--container-width-md);
+  }
+
+  @media (max-width: #{f.$upperBoundMobile-factor}px) {
+    width: var(--container-width-mobile);
+    max-width: var(--container-width-mobile);
+  }
+}
+
+// these vars are defined here so we can use all the functions in it
+:root {
+  --space: #{f.fluidVal(24, 32)};
+}

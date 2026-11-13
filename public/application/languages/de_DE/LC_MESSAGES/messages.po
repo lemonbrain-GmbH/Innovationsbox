@@ -1,0 +1,202 @@
+# German translations for Innovationsbox
+# Copyright (C) 2026 lemonbrain
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: innovationsbox\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-31 00:00+0000\n"
+"PO-Revision-Date: 2026-07-31 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: CMS core user attributes
+msgid "Birthday"
+msgstr "Geburtsdatum"
+
+msgid "Date of Birth"
+msgstr "Geburtsdatum"
+
+msgid "First Name"
+msgstr "Vorname"
+
+msgid "Last Name"
+msgstr "Nachname"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Gender"
+msgstr "Geschlecht"
+
+msgid "Male"
+msgstr "Männlich"
+
+msgid "Female"
+msgstr "Weiblich"
+
+msgid "Other"
+msgstr "Andere"
+
+msgid "Prefer not to say"
+msgstr "Keine Angabe"
+
+#: Auth flow
+msgid "Sign in"
+msgstr "Anmelden"
+
+msgid "Sign In"
+msgstr "Anmelden"
+
+msgid "Sign up"
+msgstr "Registrieren"
+
+msgid "Sign up to participate"
+msgstr "Registrieren um mitzumachen"
+
+msgid "Create Account"
+msgstr "Konto erstellen"
+
+msgid "Already have an account?"
+msgstr "Bereits ein Konto?"
+
+msgid "Welcome!"
+msgstr "Willkommen!"
+
+msgid "Go to Login"
+msgstr "Zur Anmeldung"
+
+msgid "You are already logged in."
+msgstr "Du bist bereits angemeldet."
+
+msgid "You have been logged out."
+msgstr "Du wurdest abgemeldet."
+
+msgid "Registration Pending"
+msgstr "Registrierung ausstehend"
+
+msgid "Check Your Email"
+msgstr "E-Mail prüfen"
+
+msgid "Profile Incomplete"
+msgstr "Profil unvollständig"
+
+msgid "Please complete your profile before continuing."
+msgstr "Bitte vervollständige dein Profil, bevor du fortfährst."
+
+msgid "Back to Login"
+msgstr "Zurück zur Anmeldung"
+
+msgid "Unable to validate token"
+msgstr "Token konnte nicht validiert werden"
+
+#: Profile / Account
+msgid "Edit Profile"
+msgstr "Profil bearbeiten"
+
+msgid "Personal Information"
+msgstr "Persönliche Angaben"
+
+msgid "Additional Information"
+msgstr "Zusätzliche Angaben"
+
+msgid "Profile Picture"
+msgstr "Profilbild"
+
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "User Name"
+msgstr "Benutzername"
+
+msgid "Email Address"
+msgstr "E-Mail-Adresse"
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Current Password"
+msgstr "Aktuelles Passwort"
+
+msgid "New Password"
+msgstr "Neues Passwort"
+
+msgid "Confirm Password"
+msgstr "Passwort bestätigen"
+
+msgid "Confirm New Password"
+msgstr "Neues Passwort bestätigen"
+
+msgid "Change Password"
+msgstr "Passwort ändern"
+
+msgid "Forgot Password?"
+msgstr "Passwort vergessen?"
+
+msgid "Reset Password"
+msgstr "Passwort zurücksetzen"
+
+msgid "Reset and Email Password"
+msgstr "Passwort zurücksetzen und senden"
+
+msgid "Password Changed"
+msgstr "Passwort geändert"
+
+msgid "Your password has been changed successfully. You can now sign in with your new password."
+msgstr "Dein Passwort wurde erfolgreich geändert. Du kannst dich jetzt mit deinem neuen Passwort anmelden."
+
+msgid "Enter your email address below. We will send you instructions to reset your password."
+msgstr "Gib deine E-Mail-Adresse ein. Wir senden dir eine Anleitung zum Zurücksetzen deines Passworts."
+
+msgid "Enter your new password below."
+msgstr "Gib dein neues Passwort ein."
+
+msgid "We have sent you an email with instructions to reset your password."
+msgstr "Wir haben dir eine E-Mail mit Anweisungen zum Zurücksetzen deines Passworts gesendet."
+
+msgid "Email Sent"
+msgstr "E-Mail gesendet"
+
+msgid "Email Verified"
+msgstr "E-Mail bestätigt"
+
+msgid "Your email address has been verified. You can now sign in."
+msgstr "Deine E-Mail-Adresse wurde bestätigt. Du kannst dich jetzt anmelden."
+
+msgid "Preferred Language"
+msgstr "Bevorzugte Sprache"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Timezone"
+msgstr "Zeitzone"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Your profile has been updated successfully."
+msgstr "Dein Profil wurde erfolgreich aktualisiert."
+
+msgid "Remember me"
+msgstr "Angemeldet bleiben"

@@ -1,0 +1,109 @@
+{
+  "name": "concretecms/composer_package_bedrock",
+  "description": "A fully featured skeleton for a composer managed concrete5 site",
+  "version": "1.4.0",
+  "type": "project",
+  "license": "MIT",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "ConcreteComposer\\": "./src",
+      "Concrete\\Package\\InnoFrontend\\": "./public/packages/inno_frontend/src",
+      "Concrete\\Package\\InnoShared\\": "./public/packages/inno_shared/src",
+      "Concrete\\Package\\InnoProjectIdea\\": "./public/packages/inno_project_idea/src",
+      "Concrete\\Package\\InnoModeration\\": "./public/packages/inno_moderation/src",
+      "Concrete\\Package\\InnoNotification\\": "./public/packages/inno_notification/src",
+      "Concrete\\Package\\InnoProjectSpace\\": "./public/packages/inno_project_space/src"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "./tests"
+    }
+  },
+  "repositories": [
+    {
+      "name": "packagist.lemonbrain.ch",
+      "type": "composer",
+      "url": "https://packagist.lemonbrain.ch"
+    },
+    {
+      "type": "composer",
+      "url": "https://packagist.lemonbrain.ch"
+    }
+  ],
+  "require": {
+    "composer/installers": "^2.2",
+    "concrete5/core": "^9.5.0",
+    "concrete5/dependency-patches": "^1.7",
+    "symfony/dotenv": "^5|^6|^7",
+    "concrete5/block_developer": "^1.4.4",
+    "concrete5/lemonbrain_services": "^6.0.0",
+    "psr/log": "^1.0|^3.0",
+    "psr/simple-cache": "^1.0|^3.0",
+    "lcobucci/clock": "^3.0",
+    "laminas/laminas-i18n": "^2.13"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1",
+    "pestphp/pest": "^1.23",
+    "phpstan/phpstan": "^2.1",
+    "friendsofphp/php-cs-fixer": "^3.95",
+    "zircote/swagger-php": "^4"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "allow-plugins": {
+      "composer/installers": true,
+      "mlocati/composer-patcher": true,
+      "pestphp/pest-plugin": true,
+      "kylekatarnls/update-helper": true
+    }
+  },
+  "extra": {
+    "allow-subpatches": [
+      "concretecms/dependency-patches"
+    ],
+    "installer-paths": {
+      "public/concrete": [
+        "type:concretecms-core",
+        "type:concrete5-core"
+      ],
+      "public/application/themes/{$name}": [
+        "type:concretecms-theme",
+        "type:concrete5-theme"
+      ],
+      "public/packages/{$name}": [
+        "type:concretecms-package",
+        "type:concrete5-package"
+      ],
+      "public/application/blocks/{$name}": [
+        "type:concretecms-block",
+        "type:concrete5-block"
+      ]
+    }
+  },
+  "scripts": {
+    "test:unit": "pest --testsuite=Unit",
+    "test:coverage": "pest --testsuite=Unit --coverage --min=80",
+    "test:integration": "pest --configuration=phpunit.integration.xml --testsuite=Integration",
+    "test": [
+      "@test:coverage"
+    ],
+    "lint:phpstan": "phpstan analyse --memory-limit=256M",
+    "lint:cs": "php-cs-fixer fix --dry-run --diff",
+    "lint:cs:fix": "php-cs-fixer fix",
+    "lint:php": [
+      "@lint:phpstan",
+      "@lint:cs"
+    ],
+    "audit": "composer audit",
+    "openapi:generate": [
+      "./vendor/bin/openapi public/packages/inno_*/src/ -o docs/api/openapi.yaml --format yaml",
+      "./vendor/bin/openapi public/packages/inno_*/src/ -o docs/api/openapi.json --format json"
+    ]
+  }
+}

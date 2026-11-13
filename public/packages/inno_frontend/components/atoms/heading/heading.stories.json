@@ -1,0 +1,16 @@
+{
+  "title": "Atoms/Heading",
+  "argTypes": {
+    "level": { "control": { "type": "select" }, "options": ["1", "2", "3", "4", "5", "6"] },
+    "text": { "control": "text" },
+    "id": { "control": "text" },
+    "variant": { "control": { "type": "select" }, "options": ["default", "muted", "inverse"] }
+  },
+  "stories": [
+    { "name": "H1", "args": { "level": "1" }, "parameters": { "server": { "id": "atoms/heading" } } },
+    { "name": "H2", "parameters": { "server": { "id": "atoms/heading" } } },
+    { "name": "H3", "args": { "level": "3" }, "parameters": { "server": { "id": "atoms/heading" } } },
+    { "name": "H4", "args": { "level": "4" }, "parameters": { "server": { "id": "atoms/heading" } } },
+    { "name": "Muted", "args": { "variant": "muted" }, "parameters": { "server": { "id": "atoms/heading" } } }
+  ]
+}

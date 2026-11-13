@@ -1,0 +1,17 @@
+// Atom: Skip Link
+// The .visually-hidden base styles are defined in global/global.scss.
+// On focus, the skip link becomes visible:
+.skip-link:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 8px 16px !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 600;
+  z-index: 9999;
+}

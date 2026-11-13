@@ -1,0 +1,10 @@
+// Atom: Paragraph
+// Base p, .lead, .small styles live in global/presets.scss; this file adds variants.
+
+.p--muted {
+  color: var(--color-text-muted);
+}
+
+.p--inverse {
+  color: var(--color-text-inverse);
+}

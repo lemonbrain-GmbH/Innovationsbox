@@ -1,0 +1,94 @@
+@use "~@helpers/a11y" as a11y;
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  &__icon {
+    position: absolute;
+    left: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  &__input {
+    width: 100%;
+    font-family: var(--text-font-family);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-10) var(--space-3) var(--space-10);
+
+    @include a11y.respect-motion {
+      transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+    }
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-border-strong);
+    }
+
+    @include a11y.focus-visible-ring;
+
+    &:disabled {
+      background: var(--color-bg-subtle);
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+    }
+
+    // Hide native browser cancel button (we have our own)
+    &::-webkit-search-cancel-button {
+      appearance: none;
+    }
+  }
+
+  &__clear {
+    position: absolute;
+    right: var(--space-2);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    @include a11y.respect-motion {
+      transition:
+        background var(--duration-fast) var(--ease-standard),
+        color var(--duration-fast) var(--ease-standard);
+    }
+
+    &:hover {
+      color: var(--color-text-primary);
+      background: var(--color-bg-subtle);
+    }
+
+    @include a11y.focus-visible-ring;
+  }
+}

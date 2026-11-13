@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <concrete5-cif version="1.0">
+
+    <singlepages>
+        <page package="lemonbrain_services" path="/dashboard/lemonbrain_services" name="Lemonbrain Services" description="A package for Lemonbrain Services">
+            <attributes>
+                <attributekey handle="meta_keywords">
+                    <value><![CDATA[1]]></value>
+                </attributekey>
+            </attributes>
+        </page>
+    </singlepages>
+
+</concrete5-cif> -->

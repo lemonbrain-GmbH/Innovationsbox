@@ -1,0 +1,17 @@
+{
+  "title": "Molecules/Avatar Upload",
+  "argTypes": {
+    "hasAvatar": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "avatarUrl": { "control": "text" },
+    "userName": { "control": "text" },
+    "cropperHtml": { "control": "text" }
+  },
+  "stories": [
+    { "name": "With Avatar", "parameters": { "server": { "id": "molecules/avatar-upload" } } },
+    {
+      "name": "No Avatar",
+      "args": { "hasAvatar": "false", "avatarUrl": "" },
+      "parameters": { "server": { "id": "molecules/avatar-upload" } }
+    }
+  ]
+}

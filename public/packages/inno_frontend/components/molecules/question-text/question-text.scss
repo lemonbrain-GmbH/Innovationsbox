@@ -1,0 +1,18 @@
+@use "~@helpers/functions" as f;
+
+.question {
+  position: relative;
+  display: block;
+
+  &::before {
+    content: "?";
+    display: block;
+    color: var(--color-primary);
+    font-size: f.fluidVal(48, 96);
+    position: absolute;
+    font-weight: bold;
+    top: 0;
+    left: -1rem;
+    z-index: -1;
+  }
+}

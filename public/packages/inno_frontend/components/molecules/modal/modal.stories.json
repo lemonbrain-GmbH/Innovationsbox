@@ -1,0 +1,17 @@
+{
+  "title": "Molecules/Modal",
+  "argTypes": {
+    "id": { "control": "text" },
+    "title": { "control": "text" },
+    "content": { "control": "text" },
+    "footer": { "control": "text" },
+    "size": { "control": { "type": "select" }, "options": ["sm", "md", "lg", "full"] },
+    "open": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/modal" } } },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "molecules/modal" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "molecules/modal" } } },
+    { "name": "Without Footer", "args": { "footer": "" }, "parameters": { "server": { "id": "molecules/modal" } } }
+  ]
+}

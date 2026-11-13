@@ -1,0 +1,14 @@
+{
+  "title": "Organisms/Status Update Timeline",
+  "argTypes": {
+    "canManage": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "With Updates", "parameters": { "server": { "id": "organisms/status-update-timeline" } } },
+    {
+      "name": "Read Only",
+      "args": { "canManage": "false" },
+      "parameters": { "server": { "id": "organisms/status-update-timeline" } }
+    }
+  ]
+}

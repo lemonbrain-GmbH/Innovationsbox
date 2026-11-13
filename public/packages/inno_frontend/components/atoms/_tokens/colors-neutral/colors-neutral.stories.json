@@ -1,0 +1,4 @@
+{
+  "title": "Tokens/Colors/Neutral",
+  "stories": [{ "name": "Neutral Scale", "parameters": { "server": { "id": "atoms/_tokens/colors-neutral" } } }]
+}

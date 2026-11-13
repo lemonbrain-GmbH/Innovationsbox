@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">./tests/integration</directory>
+            <!-- Exclude the legacy script-based runner -->
+            <exclude>./tests/integration/run_integration_tests.php</exclude>
+        </testsuite>
+    </testsuites>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./public/packages/inno_project_idea/src</directory>
+            <directory suffix=".php">./public/packages/inno_moderation/src</directory>
+            <directory suffix=".php">./public/packages/inno_notification/src</directory>
+            <directory suffix=".php">./public/packages/inno_project_space/src</directory>
+            <directory suffix=".php">./public/packages/inno_shared/src</directory>
+        </include>
+    </coverage>
+</phpunit>

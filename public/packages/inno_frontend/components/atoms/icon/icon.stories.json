@@ -1,0 +1,15 @@
+{
+  "title": "Atoms/Icon",
+  "argTypes": {
+    "svg": { "control": "text" },
+    "label": { "control": "text" },
+    "size": { "control": { "type": "select" }, "options": ["xs", "sm", "md", "lg", "xl"] }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/icon" } } },
+    { "name": "With Label", "args": { "label": "Bestätigen" }, "parameters": { "server": { "id": "atoms/icon" } } },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "atoms/icon" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "atoms/icon" } } },
+    { "name": "XL", "args": { "size": "xl" }, "parameters": { "server": { "id": "atoms/icon" } } }
+  ]
+}

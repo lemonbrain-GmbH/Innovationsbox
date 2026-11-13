@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  PHPUnit / Pest configuration for the Integration test suite.
+
+  Uses a dedicated bootstrap (tests/integration/bootstrap.php) that boots the
+  full Concrete CMS application.  Requires a running CMS with a valid database.
+
+  Run via:
+    composer test:integration
+
+  Prerequisites:
+    - make install (CMS + all packages installed)
+    - .env configured with valid DB_* credentials
+-->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/integration/bootstrap.php"
+         colors="true">
+    <testsuites>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">./tests/integration</directory>
+            <!-- Exclude the legacy script-based runner -->
+            <exclude>./tests/integration/run_integration_tests.php</exclude>
+        </testsuite>
+    </testsuites>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./public/packages/inno_project_idea/src</directory>
+            <directory suffix=".php">./public/packages/inno_moderation/src</directory>
+            <directory suffix=".php">./public/packages/inno_notification/src</directory>
+            <directory suffix=".php">./public/packages/inno_project_space/src</directory>
+            <directory suffix=".php">./public/packages/inno_shared/src</directory>
+        </include>
+    </coverage>
+</phpunit>

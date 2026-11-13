@@ -1,0 +1,7 @@
+{
+  "title": "Molecules/Accent Text",
+  "argTypes": {
+    "text": { "control": "text" }
+  },
+  "stories": [{ "name": "Default", "parameters": { "server": { "id": "molecules/accent-text" } } }]
+}

@@ -1,0 +1,70 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--text-font-family);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid transparent;
+
+  &--sm {
+    padding: 2px 8px;
+    font-size: 11px;
+  }
+
+  &--md {
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+
+  &--rounded {
+    border-radius: var(--radius-sm);
+  }
+
+  &--pill {
+    border-radius: var(--radius-full);
+  }
+
+  &--neutral {
+    background: var(--color-neutral-100);
+    color: var(--color-neutral-900);
+    border-color: var(--color-neutral-200);
+  }
+
+  &--primary {
+    background: var(--color-brand-primary-50);
+    color: var(--color-brand-primary-900);
+    border-color: var(--color-brand-primary-200);
+  }
+
+  &--success {
+    background: var(--color-status-success-bg);
+    color: var(--color-status-success-icon);
+    border-color: var(--color-status-success-border);
+  }
+
+  &--warning {
+    background: var(--color-status-warning-bg);
+    color: var(--color-status-warning-icon);
+    border-color: var(--color-status-warning-border);
+  }
+
+  &--error {
+    background: var(--color-status-error-bg);
+    color: var(--color-status-error-icon);
+    border-color: var(--color-status-error-border);
+  }
+
+  &--info {
+    background: var(--color-status-info-bg);
+    color: var(--color-status-info-icon);
+    border-color: var(--color-status-info-border);
+  }
+
+  &__icon {
+    display: inline-flex;
+    width: 12px;
+    height: 12px;
+  }
+}

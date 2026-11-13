@@ -1,0 +1,165 @@
+@use "sass:list";
+@use "sass:math";
+
+// there should be no need for these outside of functions.scss and mixins.scss aside from media queries:
+// @media screen and (max-width: #{$lowerBound - 1}px) {}
+
+// the variables are also casted to css vars in variables_css.scss, there with units (px)
+
+// from this width in px on down, the content gets scaled with fluidVar/fluidVal
+$upperBound-factor: 1680;
+
+// this is the lower bound where the scaling via fluidVar/fluidVal stops (from there on will be "mobile" sizes)
+$lowerBound-factor: 1200;
+
+// and therefore viewport Rage
+$viewportRange-factor: $upperBound-factor - $lowerBound-factor;
+
+// this is the upper bound for mobile devices to get a controlled width there (lb-container)
+$upperBoundMobile-factor: 480;
+
+// and for tablets
+$upperBoundTablet-factor: 768;
+
+// this is for .lb-container
+$containerMaxWidth: 1620px;
+$containerMediumWidth: 1340px;
+$containerSmallWidth: 1080px;
+
+// all the breakpoints used in responsive-fluid mixin.
+// amount should correcpond to the amount of values passed to "responsive-fluid" mixin
+$breakpoints: ($upperBoundMobile-factor, $upperBoundTablet-factor, $lowerBound-factor, $upperBound-factor);
+
+// amount of values passed to responsive-fluid mixin should correspond to amount of breakpoints specified above
+
+// usage:
+
+// responsive-fluid("font-size", (14, 20, 28, 36));
+// responsive-fluid("line-height", (20, 28, 36, 42));
+// ------ is the same as ------
+// responsive-fluid-multi((
+//   font-size: (14, 20, 28, 36),
+//   line-height: (20, 28, 36, 42),
+// ));
+
+// carefull here to match the values in mixins.scss for differnet viewports
+@function getGutterWidth() {
+  $gutter: calc(100vw - min(#{$containerMaxWidth}px, 85vw));
+
+  @return calc($gutter / 2);
+}
+
+// use this with vars like --block-space-min-factor and --block-space-max-factor:
+// fluidVar(block-space);
+@function fluidVar($name) {
+  @return clamp(
+    var(--#{$name}-min) * 1px,
+    calc(
+      var(--#{$name}-min) * 1px + (var(--#{$name}-max-factor) - var(--#{$name}-min-factor)) *
+        ((100vw - #{$lowerBound-factor}px) / #{$viewportRange-factor})
+    ),
+    var(--#{$name}-max) * 1px
+  );
+}
+
+// use this with direct values like fluidVal(24, 48);
+@function fluidVal($min, $max) {
+  @return clamp(
+    $min * 1px,
+    calc(
+      $min * 1px + ($max - $min) *
+        ((100vw - #{$lowerBound-factor}px) / #{$viewportRange-factor})
+    ),
+    $max * 1px
+  );
+}
+
+// reduce/extend breakpoints array as needed
+// values can only be numbers of pixels (no unit)
+@mixin responsive-fluid($property, $values, $breakpoints: $breakpoints) {
+  @if list.length($breakpoints) != list.length($values) {
+    @error "Breakpoint and value lists must be of equal length.";
+  }
+
+  // Initial value before the first breakpoint
+  $initial-value: list.nth($values, 1);
+
+  #{$property}: #{$initial-value}px;
+
+  // Loop through each breakpoint range
+  @for $i from 2 through list.length($breakpoints) {
+    $min-width: list.nth($breakpoints, $i - 1);
+    $max-width: list.nth($breakpoints, $i);
+    $min-value: list.nth($values, $i - 1);
+    $max-value: list.nth($values, $i);
+
+    @media (min-width: #{$min-width}px) {
+      #{$property}: fluid-value($min-width, $max-width, $min-value, $max-value);
+    }
+  }
+
+  // Final hard stop after last breakpoint
+  $last-breakpoint: list.nth($breakpoints, -1);
+  $last-value: list.nth($values, -1);
+
+  @media (min-width: #{$last-breakpoint}px) {
+    #{$property}: #{$last-value}px;
+  }
+}
+
+// this accepts multiple attributes and their values in a map
+// values can only be numbers of pixels (no unit)
+// only generates one @media stack
+@mixin responsive-fluid-multi($map, $breakpoints: $breakpoints) {
+  // Validate lengths
+  @each $prop, $values in $map {
+    @if list.length($breakpoints) != list.length($values) {
+      @error "Breakpoint and value lists for #{$prop} must be of equal length.";
+    }
+  }
+
+  // Initial values before first breakpoint
+  @each $prop, $values in $map {
+    $initial-value: list.nth($values, 1);
+
+    #{$prop}: #{$initial-value}px;
+  }
+
+  // Loop through each breakpoint range
+  @for $i from 2 through list.length($breakpoints) {
+    $min-width: list.nth($breakpoints, $i - 1);
+    $max-width: list.nth($breakpoints, $i);
+
+    @media (min-width: #{$min-width}px) {
+      @each $prop, $values in $map {
+        $min-value: list.nth($values, $i - 1);
+        $max-value: list.nth($values, $i);
+
+        #{$prop}: fluid-value($min-width, $max-width, $min-value, $max-value);
+      }
+    }
+  }
+
+  // Final hard stop after last breakpoint
+  $last-breakpoint: list.nth($breakpoints, -1);
+
+  @media (min-width: #{$last-breakpoint}px) {
+    @each $prop, $values in $map {
+      $last-value: list.nth($values, -1);
+
+      #{$prop}: #{$last-value}px;
+    }
+  }
+}
+
+// not to be used directly, only inside mixin responsive-fluid
+@function fluid-value($min-width, $max-width, $min-value, $max-value) {
+  $slope: math.div($max-value - $min-value, $max-width - $min-width);
+  $base: $min-value - ($slope * $min-width);
+
+  @return clamp(
+    #{$min-value}px,
+    #{$base}px + #{$slope * 100}vw,
+    #{$max-value}px
+  );
+}

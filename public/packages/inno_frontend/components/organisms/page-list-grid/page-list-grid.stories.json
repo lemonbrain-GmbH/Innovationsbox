@@ -1,0 +1,4 @@
+{
+  "title": "Organisms/Page List Grid",
+  "stories": [{ "name": "Five Categories", "parameters": { "server": { "id": "organisms/page-list-grid" } } }]
+}

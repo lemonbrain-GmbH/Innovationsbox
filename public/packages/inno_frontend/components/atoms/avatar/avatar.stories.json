@@ -1,0 +1,22 @@
+{
+  "title": "Atoms/Avatar",
+  "argTypes": {
+    "src": { "control": "text" },
+    "alt": { "control": "text" },
+    "name": { "control": "text" },
+    "size": { "control": { "type": "select" }, "options": ["xs", "sm", "md", "lg", "xl"] },
+    "shape": { "control": { "type": "select" }, "options": ["circle", "square"] }
+  },
+  "stories": [
+    { "name": "Initials", "parameters": { "server": { "id": "atoms/avatar" } } },
+    {
+      "name": "With Image",
+      "args": { "src": "https://picsum.photos/seed/person/200/200", "alt": "Anna Müller" },
+      "parameters": { "server": { "id": "atoms/avatar" } }
+    },
+    { "name": "Square", "args": { "shape": "square" }, "parameters": { "server": { "id": "atoms/avatar" } } },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "atoms/avatar" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "atoms/avatar" } } },
+    { "name": "XL", "args": { "size": "xl" }, "parameters": { "server": { "id": "atoms/avatar" } } }
+  ]
+}

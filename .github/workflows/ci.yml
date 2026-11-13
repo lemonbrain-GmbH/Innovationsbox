@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: zip, gd, intl, pdo_mysql
+          tools: composer:v2
+
+      - run: npm ci
+      - run: composer install --no-interaction --no-progress --ignore-platform-req=php
+
+      - run: npm run lint
+      - run: npm run format
+      - run: npm run lint:scss
+      - run: composer lint:php
+
+  typecheck:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run typecheck
+
+  test:
+    name: Test & Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: zip, gd, intl, pdo_mysql, pcov
+          tools: composer:v2
+
+      - run: npm ci
+      - run: composer install --no-interaction --no-progress --ignore-platform-req=php
+
+      - name: PHP unit tests (80% coverage minimum)
+        run: ./vendor/bin/pest --testsuite=Unit --coverage --min=80
+
+      - name: Build frontend assets
+        run: |
+          npm run tokens
+          npm run production
+
+  security:
+    name: Security
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: zip, gd, intl, pdo_mysql
+          tools: composer:v2
+
+      - run: npm ci
+      - run: composer install --no-interaction --no-progress --ignore-platform-req=php
+
+      - name: npm audit
+        run: npx better-npm-audit audit --level high
+
+      - name: Composer audit
+        run: |
+          KNOWN_ADVISORY_COUNT=6
+          COUNT=$(composer audit --abandoned=ignore --format=json 2>/dev/null | grep -o '"advisoryId"' | wc -l)
+          echo "Found $COUNT advisories ($KNOWN_ADVISORY_COUNT known/accepted)"
+          if [ "$COUNT" -gt "$KNOWN_ADVISORY_COUNT" ]; then
+            composer audit --abandoned=ignore
+            exit 1
+          fi
+
+      - name: Semgrep SAST
+        run: |
+          pip3 install semgrep
+          semgrep --config=auto --error resources/js/ public/packages/inno_*/src/ storybook-server/

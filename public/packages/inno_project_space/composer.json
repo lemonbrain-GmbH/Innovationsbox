@@ -1,0 +1,17 @@
+{
+  "name": "concrete5/inno_project_space",
+  "description": "Project Space domain package for Innovationsbox",
+  "type": "concrete5-package",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.lemonbrain.ch"
+    }
+  ],
+  "require": {
+    "concrete5/core": "^9.5",
+    "concrete5/inno_shared": "self.version"
+  }
+}

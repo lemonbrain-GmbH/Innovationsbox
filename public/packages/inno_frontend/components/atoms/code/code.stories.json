@@ -1,0 +1,15 @@
+{
+  "title": "Atoms/Code",
+  "argTypes": {
+    "content": { "control": "text" },
+    "block": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Inline", "parameters": { "server": { "id": "atoms/code" } } },
+    {
+      "name": "Block",
+      "args": { "block": "true", "content": "composer test\nnpm run production" },
+      "parameters": { "server": { "id": "atoms/code" } }
+    }
+  ]
+}

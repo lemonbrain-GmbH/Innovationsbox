@@ -1,0 +1,11 @@
+{
+  "title": "Atoms/Email Link",
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/email-link" } } },
+    {
+      "name": "With Label",
+      "args": { "email": "anna@example.com", "label": "E-Mail senden" },
+      "parameters": { "server": { "id": "atoms/email-link" } }
+    }
+  ]
+}

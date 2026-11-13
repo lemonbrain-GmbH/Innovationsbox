@@ -1,0 +1,14 @@
+{
+  "title": "Atoms/Tooltip",
+  "argTypes": {
+    "content": { "control": "text" },
+    "position": { "control": { "type": "select" }, "options": ["top", "right", "bottom", "left"] },
+    "trigger": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Top", "parameters": { "server": { "id": "atoms/tooltip" } } },
+    { "name": "Bottom", "args": { "position": "bottom" }, "parameters": { "server": { "id": "atoms/tooltip" } } },
+    { "name": "Left", "args": { "position": "left" }, "parameters": { "server": { "id": "atoms/tooltip" } } },
+    { "name": "Right", "args": { "position": "right" }, "parameters": { "server": { "id": "atoms/tooltip" } } }
+  ]
+}

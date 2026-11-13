@@ -1,0 +1,26 @@
+{
+  "title": "Molecules/Skeleton",
+  "argTypes": {
+    "variant": { "control": { "type": "select" }, "options": ["text", "heading", "rectangle", "circle", "image"] },
+    "width": { "control": "text" },
+    "height": { "control": "text" },
+    "count": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Text", "parameters": { "server": { "id": "molecules/skeleton" } } },
+    { "name": "Text Multi-line", "args": { "count": "3" }, "parameters": { "server": { "id": "molecules/skeleton" } } },
+    { "name": "Heading", "args": { "variant": "heading" }, "parameters": { "server": { "id": "molecules/skeleton" } } },
+    {
+      "name": "Rectangle",
+      "args": { "variant": "rectangle" },
+      "parameters": { "server": { "id": "molecules/skeleton" } }
+    },
+    { "name": "Circle", "args": { "variant": "circle" }, "parameters": { "server": { "id": "molecules/skeleton" } } },
+    {
+      "name": "Circle Large",
+      "args": { "variant": "circle", "width": "80px", "height": "80px" },
+      "parameters": { "server": { "id": "molecules/skeleton" } }
+    },
+    { "name": "Image", "args": { "variant": "image" }, "parameters": { "server": { "id": "molecules/skeleton" } } }
+  ]
+}

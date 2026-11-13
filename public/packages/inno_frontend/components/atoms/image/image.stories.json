@@ -1,0 +1,24 @@
+{
+  "title": "Atoms/Image",
+  "argTypes": {
+    "src": { "control": "text" },
+    "alt": { "control": "text" },
+    "ratio": { "control": { "type": "select" }, "options": ["auto", "16/9", "3/2", "4/3", "1/1"] },
+    "fit": { "control": { "type": "select" }, "options": ["cover", "contain"] },
+    "rounded": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "width": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/image" } } },
+    {
+      "name": "Rounded 3:2",
+      "args": { "ratio": "3/2", "rounded": "true" },
+      "parameters": { "server": { "id": "atoms/image" } }
+    },
+    {
+      "name": "Square Contain",
+      "args": { "ratio": "1/1", "fit": "contain", "width": "200px" },
+      "parameters": { "server": { "id": "atoms/image" } }
+    }
+  ]
+}

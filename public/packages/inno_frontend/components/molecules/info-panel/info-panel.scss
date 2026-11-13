@@ -1,0 +1,48 @@
+@use "~@helpers/functions" as f;
+
+.info-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: f.fluidVal(24, 48);
+  align-items: center;
+  max-width: var(--header-content-max-width, 1200px);
+  margin: f.fluidVal(32, 64) auto;
+  padding: 0 var(--space-4);
+  box-sizing: border-box;
+  width: 100%;
+
+  @media (max-width: #{f.$upperBoundTablet-factor}px) {
+    grid-template-columns: 1fr;
+  }
+
+  &__image {
+    overflow: hidden;
+    border-radius: var(--radius-lg, 20px);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 594 / 511;
+    }
+  }
+
+  &__content {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    min-width: 0;
+    max-width: 100%;
+
+    h2,
+    h3 {
+      margin-top: 0;
+      margin-bottom: f.fluidVal(12, 20);
+    }
+
+    p {
+      margin-bottom: f.fluidVal(12, 16);
+      line-height: 1.6;
+    }
+  }
+}

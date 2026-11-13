@@ -1,0 +1,9 @@
+{
+  "title": "Pages/Homepage",
+  "argTypes": {
+    "heroTitle": { "control": "text" },
+    "heroBody": { "control": "text" },
+    "footerText": { "control": "text" }
+  },
+  "stories": [{ "name": "Default", "parameters": { "server": { "id": "pages/homepage" } } }]
+}

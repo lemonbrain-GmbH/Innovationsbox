@@ -1,0 +1,109 @@
+// Login page styles.
+// Auth-card component styles are in the component SCSS.
+// This file handles login-specific overrides.
+
+@use "../helper/functions" as f;
+@use "../global/_generated-arrays" as t;
+@use "~@helpers/a11y" as a11y;
+
+// Style CMS-generated attribute forms (fill_attributes page) to match design system.
+// Widget\Attribute::display() outputs .form-group > label + input markup.
+.auth-card .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+
+  label {
+    display: inline-block;
+    font-family: var(--text-font-family);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    font-size: clamp(13px, 13px + 3 * (100vw - 1200px) / 480, 16px);
+    line-height: 1.4;
+  }
+
+  .ccm-required {
+    color: var(--color-text-error);
+    margin-left: 2px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="number"],
+  input[type="password"],
+  textarea,
+  select {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: var(--text-font-family);
+    font-size: var(--p-font-size, 16px);
+    line-height: 1.5;
+    color: var(--color-text-primary);
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+
+    @include a11y.respect-motion {
+      transition:
+        border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+    }
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    &:hover:not(:disabled) {
+      border-color: var(--color-border-strong);
+    }
+
+    @include a11y.focus-visible-ring;
+  }
+}
+
+.concrete-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.ccm-page .auth-text-sm {
+  @include f.responsive-fluid("font-size", t.$text-xs-font-sizes);
+  @include f.responsive-fluid("line-height", t.$text-xs-line-heights);
+
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
+
+  a {
+    @include f.responsive-fluid("font-size", t.$text-xs-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-xs-line-heights);
+
+    color: var(--color-action-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-regular);
+
+    &:hover {
+      text-decoration: underline;
+      color: var(--color-action-primary-hover);
+    }
+  }
+}
+
+.ccm-page a.auth-link {
+  @include f.responsive-fluid("font-size", t.$text-sm-font-sizes);
+  @include f.responsive-fluid("line-height", t.$text-sm-line-heights);
+
+  color: var(--color-action-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-regular);
+
+  &:hover {
+    text-decoration: underline;
+    color: var(--color-action-primary-hover);
+  }
+}
