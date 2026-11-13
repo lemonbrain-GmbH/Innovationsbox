@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+
+    <table name="btAcceptCookies">
+        <field name="bID" type="I">
+            <key/>
+            <unsigned/>
+        </field>
+        <field name="cookie_hint_title" type="C" size="255"></field>
+        <field name="cookie_hint" type="X2"></field>
+        <field name="cookies_setting_description" type="X2"></field>
+    </table>
+
+    <table name="btAcceptCookiesCookiesEntries">
+        <field name="id" type="I">
+            <key/>
+            <unsigned/>
+            <autoincrement/>
+        </field>
+        <field name="bID" type="I">
+            <unsigned/>
+        </field>
+        <field name="cookie_handler" type="C" size="255"></field>
+        <field name="cookie_title" type="C" size="255"></field>
+        <field name="cookie_description" type="X2"></field>
+        <field name="sortOrder" type="I"></field>
+    </table>
+
+</schema>

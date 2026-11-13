@@ -1,0 +1,15 @@
+.git
+.claude
+node_modules
+storybook-static
+public/concrete
+public/application/files
+public/application/config/generated_overrides
+public/application/config/doctrine
+test-results
+tests/e2e/test-results
+tests/e2e/playwright-report
+export
+import
+.env
+*.log

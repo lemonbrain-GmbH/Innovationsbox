@@ -1,0 +1,20 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 6
+    treatPhpDocTypesAsCertain: false
+    paths:
+        - public/packages/inno_project_idea/src
+        - public/packages/inno_moderation/src
+        - public/packages/inno_notification/src
+        - public/packages/inno_project_space/src
+        - public/packages/inno_shared/src
+        - public/packages/inno_frontend/src
+    excludePaths:
+        - vendor
+        - public/packages/inno_shared/src/Infrastructure/OpenApi
+    scanDirectories:
+        - public/concrete/src
+    bootstrapFiles:
+        - vendor/autoload.php

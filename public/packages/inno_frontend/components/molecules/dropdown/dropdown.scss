@@ -1,0 +1,87 @@
+@use "~@helpers/a11y" as a11y;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  &__chevron {
+    font-size: 0.75em;
+    line-height: 1;
+  }
+
+  &__menu {
+    position: absolute;
+    min-width: 180px;
+    margin: 0;
+    padding: var(--space-2) 0;
+    list-style: none;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: var(--z-dropdown);
+  }
+
+  &--bottom-start &__menu {
+    top: calc(100% + var(--space-1));
+    left: 0;
+  }
+
+  &--bottom-end &__menu {
+    top: calc(100% + var(--space-1));
+    right: 0;
+  }
+
+  &--top-start &__menu {
+    bottom: calc(100% + var(--space-1));
+    left: 0;
+  }
+
+  &--top-end &__menu {
+    bottom: calc(100% + var(--space-1));
+    right: 0;
+  }
+
+  &__item {
+    display: block;
+    padding: var(--space-2) var(--space-4);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-size: 14px;
+
+    @include a11y.respect-motion {
+      transition: background var(--duration-fast) var(--ease-standard);
+    }
+
+    &:hover:not([aria-disabled="true"]) {
+      background: var(--color-bg-subtle);
+    }
+
+    @include a11y.focus-visible-ring;
+
+    &[aria-disabled="true"] {
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+    }
+
+    &--danger {
+      color: var(--color-action-danger);
+
+      &:hover {
+        background: var(--color-status-error-subtle, var(--color-bg-subtle));
+      }
+    }
+  }
+
+  &__divider {
+    margin: var(--space-2) 0;
+    border: 0;
+    border-top: 1px solid var(--color-border-default);
+  }
+}

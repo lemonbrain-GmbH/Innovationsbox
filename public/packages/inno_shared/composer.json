@@ -1,0 +1,23 @@
+{
+  "name": "concrete5/inno_shared",
+  "description": "Shared kernel: cross-package event contracts for Innovationsbox",
+  "type": "concrete5-package",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.lemonbrain.ch"
+    }
+  ],
+  "require": {
+    "concrete5/core": "^9.5",
+    "psr/log": "^1.0|^3.0",
+    "psr/simple-cache": "^1.0|^3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Concrete\\Package\\InnoShared\\": "src/"
+    }
+  }
+}

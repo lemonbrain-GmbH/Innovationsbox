@@ -1,0 +1,19 @@
+{
+  "title": "Molecules/Project Card",
+  "argTypes": {
+    "title": { "control": "text" },
+    "description": { "control": "text" },
+    "status": { "control": { "type": "select", "options": ["active", "completed", "archived"] } },
+    "categoryName": { "control": "text" },
+    "initiatorName": { "control": "text" },
+    "initiatorAvatarUrl": { "control": "text" },
+    "memberCount": { "control": "number" }
+  },
+  "stories": [
+    { "name": "Active", "args": {} },
+    { "name": "Active with Category", "args": { "categoryName": "Mobilität" } },
+    { "name": "Completed", "args": { "status": "completed", "categoryName": "Landwirtschaft" } },
+    { "name": "No Update", "args": { "latestUpdateTitle": "", "latestUpdateDate": "", "categoryName": "" } }
+  ],
+  "parameters": { "server": { "id": "molecules/project-card" } }
+}

@@ -1,0 +1,75 @@
+<?php
+
+declare(strict_types=1);
+
+use Concrete\Package\InnoProjectSpace\Application\UseCase\LeaveSpace\LeaveSpaceCommand;
+use Concrete\Package\InnoProjectSpace\Application\UseCase\LeaveSpace\LeaveSpaceHandler;
+use Concrete\Package\InnoProjectSpace\Domain\Model\ProjectSpace;
+use Concrete\Package\InnoProjectSpace\Port\Out\ProjectSpaceRepositoryInterface;
+use Concrete\Package\InnoShared\Domain\Event\MemberLeft;
+use Concrete\Package\InnoShared\Infrastructure\Contract\Auth\AuthInterface;
+use Concrete\Package\InnoShared\Infrastructure\Contract\Logger\LoggerInterface;
+use Concrete\Package\InnoShared\Infrastructure\Contract\Transaction\TransactionInterface;
+use Concrete\Package\InnoShared\Infrastructure\Exception\AuthException;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+
+afterEach(fn() => Mockery::close());
+
+test('handle() removes a member and dispatches MemberLeft', function () {
+    $space = ProjectSpace::createFromApprovedIdea('space_1', 'idea_1', 'Title', 'Desc', '1');
+    $space->addMember('2');
+
+    $repo = Mockery::mock(ProjectSpaceRepositoryInterface::class);
+    $auth = Mockery::mock(AuthInterface::class);
+    $dispatcher = Mockery::mock(EventDispatcherInterface::class);
+    $tx = Mockery::mock(TransactionInterface::class);
+    $logger = Mockery::mock(LoggerInterface::class);
+
+    $repo->shouldReceive('findById')->with('space_1')->andReturn($space);
+    $repo->shouldReceive('save')->once();
+    $auth->shouldReceive('isAuthenticated')->andReturn(true);
+    $auth->shouldReceive('getUserId')->andReturn(2);
+    $dispatcher->shouldReceive('dispatch')->once()->with(Mockery::type(MemberLeft::class), MemberLeft::NAME);
+    $tx->shouldReceive('transactional')->andReturnUsing(fn(callable $fn) => $fn());
+    $logger->shouldReceive('info');
+
+    $handler = new LeaveSpaceHandler($repo, $auth, $dispatcher, $tx, $logger);
+    $handler->handle(new LeaveSpaceCommand('space_1'));
+
+    expect($space->getMemberIds())->not->toContain('2');
+});
+
+test('handle() throws DomainException when initiator tries to leave', function () {
+    $space = ProjectSpace::createFromApprovedIdea('space_1', 'idea_1', 'Title', 'Desc', '1');
+
+    $repo = Mockery::mock(ProjectSpaceRepositoryInterface::class);
+    $auth = Mockery::mock(AuthInterface::class);
+    $dispatcher = Mockery::mock(EventDispatcherInterface::class);
+    $tx = Mockery::mock(TransactionInterface::class);
+    $logger = Mockery::mock(LoggerInterface::class);
+
+    $repo->shouldReceive('findById')->with('space_1')->andReturn($space);
+    $auth->shouldReceive('isAuthenticated')->andReturn(true);
+    $auth->shouldReceive('getUserId')->andReturn(1); // initiator
+    $tx->shouldReceive('transactional')->andReturnUsing(fn(callable $fn) => $fn());
+
+    $handler = new LeaveSpaceHandler($repo, $auth, $dispatcher, $tx, $logger);
+
+    expect(fn() => $handler->handle(new LeaveSpaceCommand('space_1')))
+        ->toThrow(\DomainException::class, 'initiator cannot be removed');
+});
+
+test('handle() throws AuthException when not authenticated', function () {
+    $repo = Mockery::mock(ProjectSpaceRepositoryInterface::class);
+    $auth = Mockery::mock(AuthInterface::class);
+    $dispatcher = Mockery::mock(EventDispatcherInterface::class);
+    $tx = Mockery::mock(TransactionInterface::class);
+    $logger = Mockery::mock(LoggerInterface::class);
+
+    $auth->shouldReceive('isAuthenticated')->andReturn(false);
+
+    $handler = new LeaveSpaceHandler($repo, $auth, $dispatcher, $tx, $logger);
+
+    expect(fn() => $handler->handle(new LeaveSpaceCommand('space_1')))
+        ->toThrow(AuthException::class);
+});

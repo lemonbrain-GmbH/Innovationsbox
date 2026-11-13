@@ -1,0 +1,76 @@
+@use "../helper/functions" as f;
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none !important;
+  text-rendering: optimizelegibility;
+  font-family: var(--p-font-family, sans-serif);
+}
+
+body {
+  max-width: 100vw;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+// Sticky footer — push footer to bottom on short pages
+.ccm-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+main, #main-content-area {
+  flex: 1;
+}
+
+figure {
+  margin: 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visually-hidden, .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+.spaced-block {
+  margin-top: f.fluidVal(16, 32);
+  margin-bottom: f.fluidVal(32, 64);
+}
+
+address {
+  font-style: normal;
+}
+
+.only-mobile {
+  display: none;
+}
+
+@media screen and (max-width: #{f.$lowerBound-factor - 1}px) {
+  .only-desktop {
+    display: none !important;
+  }
+
+  .only-mobile {
+    display: block;
+  }
+}

@@ -1,0 +1,28 @@
+User-agent: *
+Disallow: /                             #Remove When online
+
+
+Disallow: /application/attributes
+Disallow: /application/authentication
+Disallow: /application/bootstrap
+Disallow: /application/config
+Disallow: /application/controllers
+Disallow: /application/elements
+Disallow: /application/helpers
+Disallow: /application/jobs
+Disallow: /application/languages
+Disallow: /application/mail
+Disallow: /application/models
+Disallow: /application/page_types
+Disallow: /application/single_pages
+Disallow: /application/tools
+Disallow: /application/views
+Disallow: /ccm/system/captcha/picture
+
+#Disallow: /LemonbrainNewssystem/*      #Exclude all your async APIs
+#Disallow: /search_plus_plus/*
+# Disallow: /api/*   		This should always be the REST ajax path on new projects
+# Disallow: /graphql/*		This should always be the GraphQL path on new projects
+Disallow: /login
+
+Sitemap: https://domain.ch/sitemap.xml  #Change to your domain

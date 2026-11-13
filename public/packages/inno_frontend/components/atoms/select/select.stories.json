@@ -1,0 +1,26 @@
+{
+  "title": "Atoms/Select",
+  "argTypes": {
+    "id": { "control": "text" },
+    "name": { "control": "text" },
+    "value": { "control": "text" },
+    "placeholder": { "control": "text" },
+    "size": { "control": { "type": "select" }, "options": ["sm", "md", "lg"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "required": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "invalid": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "describedBy": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/select" } } },
+    { "name": "With Value", "args": { "value": "ch" }, "parameters": { "server": { "id": "atoms/select" } } },
+    {
+      "name": "Disabled",
+      "args": { "disabled": "true", "value": "ch" },
+      "parameters": { "server": { "id": "atoms/select" } }
+    },
+    { "name": "Invalid", "args": { "invalid": "true" }, "parameters": { "server": { "id": "atoms/select" } } },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "atoms/select" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "atoms/select" } } }
+  ]
+}

@@ -1,0 +1,65 @@
+FROM php:8.3-apache
+
+# System dependencies for Concrete CMS
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git unzip curl default-mysql-client \
+    libzip-dev libpng-dev libjpeg-dev libfreetype-dev libicu-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install zip gd intl pdo_mysql opcache \
+    && a2enmod rewrite headers expires \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Install Node.js 20 (needed for frontend build)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy project files
+COPY . .
+
+# Install dependencies, build assets, then clean up to reduce image size
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --no-interaction --no-progress --ignore-platform-req=php \
+    && npm ci && npm run tokens && npm run production \
+    && rm -rf node_modules /root/.npm /tmp/* \
+    && apt-get purge -y nodejs && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
+# Apache configuration — serve from /var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/sites-available/000-default.conf \
+    && sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}/!g' \
+    /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf \
+    && sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' \
+    /etc/apache2/apache2.conf
+
+# Disable browser caching for all responses (prevents stale API data after mutations in E2E tests)
+RUN printf '<IfModule mod_headers.c>\n\
+  Header always set Cache-Control "no-store, no-cache, must-revalidate"\n\
+  Header always set Pragma "no-cache"\n\
+  Header always set Expires "0"\n\
+</IfModule>\n' > /etc/apache2/conf-available/no-cache.conf \
+    && a2enconf no-cache
+
+# Create directories that are gitignored but needed at runtime
+RUN mkdir -p /var/www/html/public/application/files
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/public/application/config \
+    /var/www/html/public/application/files \
+    /var/www/html/public/packages
+
+# Copy test-specific files
+COPY docker/test-entrypoint.sh /usr/local/bin/test-entrypoint.sh
+RUN chmod +x /usr/local/bin/test-entrypoint.sh
+
+EXPOSE 80
+
+ENTRYPOINT ["test-entrypoint.sh"]

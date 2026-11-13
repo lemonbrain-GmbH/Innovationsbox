@@ -1,0 +1,16 @@
+{
+  "title": "Molecules/Collaboard Item",
+  "argTypes": {
+    "title": { "control": "text" },
+    "url": { "control": "text" },
+    "isActive": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/collaboard-item" } } },
+    {
+      "name": "Active",
+      "args": { "isActive": "true" },
+      "parameters": { "server": { "id": "molecules/collaboard-item" } }
+    }
+  ]
+}

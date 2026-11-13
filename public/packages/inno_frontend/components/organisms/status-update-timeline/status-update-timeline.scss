@@ -1,0 +1,19 @@
+.status-update-timeline {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &__list {
+    border-left: 2px solid var(--color-border-default);
+    padding-left: var(--space-5);
+  }
+}

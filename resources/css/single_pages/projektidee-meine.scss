@@ -1,0 +1,203 @@
+// Override Bootstrap's .modal { display: none } from Atomik theme CSS
+// to ensure native <dialog> elements with [open] attribute are visible.
+.modal[open] {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: var(--color-bg-overlay);
+}
+
+dialog.modal[open]:not(:modal) {
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+}
+
+.projektidee-meine-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  &__auth-notice {
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+
+    p {
+      margin-bottom: var(--space-4);
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+    color: var(--color-text-muted);
+
+    p {
+      margin-bottom: var(--space-4);
+    }
+  }
+}
+
+.idea-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4);
+  margin-bottom: var(--space-3);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  &__title {
+    font-size: var(--font-size-lg, 1.125rem);
+    margin: 0;
+  }
+
+  &__description {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+    line-height: 1.5;
+  }
+
+  &__meta {
+    display: flex;
+    gap: var(--space-3);
+    font-size: var(--font-size-sm, 0.875rem);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-2);
+  }
+
+  &__files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  &__file {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm, 4px);
+    font-size: var(--font-size-sm, 0.875rem);
+    color: var(--color-text);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-surface-hover, rgb(0 0 0 / 2%));
+      text-decoration: none;
+    }
+  }
+
+  &__rejection {
+    background: var(--color-error-bg, #fef2f2);
+    color: var(--color-error, #dc3545);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm, 4px);
+    margin-top: var(--space-2);
+    font-size: var(--font-size-sm, 0.875rem);
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+}
+
+.edit-file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-sm, 0.875rem);
+
+  &__remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-error, #dc3545);
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0 var(--space-1);
+  }
+}
+
+.header-image-upload {
+  &__dropzone {
+    border: 2px dashed var(--card-border, #e4e4e4);
+    border-radius: var(--radius-md);
+    padding: var(--space-8, 32px);
+    text-align: center;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    transition: border-color 150ms ease, background-color 150ms ease;
+
+    &:hover,
+    &--active {
+      border-color: var(--color-action-primary);
+      background-color: var(--color-surface-hover, rgb(0 0 0 / 2%));
+    }
+  }
+
+  &__preview {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    aspect-ratio: 390 / 225;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__remove {
+    position: absolute;
+    top: var(--space-2, 8px);
+    right: var(--space-2, 8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgb(255 255 255 / 90%);
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    padding: 0;
+    transition: background-color 150ms ease, color 150ms ease;
+
+    &:hover {
+      background-color: rgb(255 255 255 / 100%);
+      color: var(--color-action-danger, var(--color-status-error-600));
+    }
+  }
+}

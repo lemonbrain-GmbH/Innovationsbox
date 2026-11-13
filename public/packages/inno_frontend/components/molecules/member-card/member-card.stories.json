@@ -1,0 +1,41 @@
+{
+  "title": "Molecules/Member Card",
+  "argTypes": {
+    "userName": { "control": "text" },
+    "userInitials": { "control": "text" },
+    "avatarUrl": { "control": "text" },
+    "profileUrl": { "control": "text" },
+    "memberSince": { "control": "text" },
+    "role": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/member-card" } } },
+    {
+      "name": "Initials Only",
+      "args": { "avatarUrl": "" },
+      "parameters": { "server": { "id": "molecules/member-card" } }
+    },
+    {
+      "name": "Without Role",
+      "args": { "role": "" },
+      "parameters": { "server": { "id": "molecules/member-card" } }
+    },
+    {
+      "name": "Expert (Logged In)",
+      "args": {
+        "expertise": "Erneuerbare Energien",
+        "email": "marco@innovationsbox.ch"
+      },
+      "parameters": { "server": { "id": "molecules/member-card" } }
+    },
+    {
+      "name": "Expert (Anonymous)",
+      "args": {
+        "profileUrl": "",
+        "email": "",
+        "expertise": "Erneuerbare Energien"
+      },
+      "parameters": { "server": { "id": "molecules/member-card" } }
+    }
+  ]
+}

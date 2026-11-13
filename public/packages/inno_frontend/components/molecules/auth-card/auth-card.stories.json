@@ -1,0 +1,22 @@
+{
+  "title": "Molecules/Auth Card",
+  "argTypes": {
+    "title": { "control": "text" },
+    "subtitle": { "control": "text" },
+    "showLogo": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "content": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/auth-card" } } },
+    {
+      "name": "Register",
+      "args": { "title": "Konto erstellen", "subtitle": "Registriere dich, um mitzumachen" },
+      "parameters": { "server": { "id": "molecules/auth-card" } }
+    },
+    {
+      "name": "Without Logo",
+      "args": { "showLogo": "false" },
+      "parameters": { "server": { "id": "molecules/auth-card" } }
+    }
+  ]
+}

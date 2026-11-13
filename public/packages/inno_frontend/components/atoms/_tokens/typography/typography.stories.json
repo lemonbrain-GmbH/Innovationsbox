@@ -1,0 +1,7 @@
+{
+  "title": "Tokens/Typography",
+  "argTypes": {
+    "sampleText": { "control": "text" }
+  },
+  "stories": [{ "name": "Text Scale", "parameters": { "server": { "id": "atoms/_tokens/typography" } } }]
+}

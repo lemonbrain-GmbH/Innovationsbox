@@ -1,0 +1,19 @@
+{
+  "title": "Organisms/Hero Image",
+  "argTypes": {
+    "title": { "control": "text" },
+    "body": { "control": "text" },
+    "imageSrc": { "control": "text" },
+    "imageAlt": { "control": "text" },
+    "buttonLabel": { "control": "text" },
+    "buttonHref": { "control": "text" }
+  },
+  "stories": [
+    { "name": "With Button", "parameters": { "server": { "id": "organisms/hero-image" } } },
+    {
+      "name": "Without Button",
+      "args": { "buttonLabel": "" },
+      "parameters": { "server": { "id": "organisms/hero-image" } }
+    }
+  ]
+}

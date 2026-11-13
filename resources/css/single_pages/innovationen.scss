@@ -1,0 +1,170 @@
+@use "../helper/functions" as f;
+@use "../global/_generated-arrays" as t;
+@use "../../../public/packages/inno_frontend/components/molecules/project-card/project-card";
+
+.innovationen-page {
+  max-width: var(--page-content-max-width, 1200px);
+  margin: 0 auto;
+  padding: var(--page-top-padding, 60px) var(--space-4) var(--space-6);
+
+  // --- Header: title left, search right (vertically centered) ---
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  &__title {
+    margin: 0;
+    color: var(--page-title-color, #79694d);
+    font-size: var(--page-title-font-size, 42px);
+    font-weight: var(--font-weight-bold, 700);
+    line-height: 1.35;
+  }
+
+  // Subtitle sits between header row and divider
+  &__subtitle {
+    margin: var(--space-3, 12px) 0 var(--space-5, 20px);
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm-size, 15px);
+    font-weight: var(--font-weight-regular, 400);
+  }
+
+  &__search {
+    flex: 0 0 auto;
+    width: 343px;
+
+    @media (width <= 768px) {
+      width: 100%;
+    }
+  }
+
+  &__search-input {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid var(--filter-search-border, rgb(0 0 0 / 60%));
+    border-radius: var(--radius-md);
+    font-size: 18px;
+    font-weight: var(--font-weight-semibold, 600);
+    background: transparent;
+    color: var(--color-text-primary);
+    transition: border-color 150ms ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    &::placeholder {
+      color: var(--text-muted-color, #666);
+      font-weight: var(--font-weight-semibold, 600);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-action-primary);
+    }
+  }
+
+  // --- Horizontal divider ---
+  &__divider {
+    border: none;
+    border-top: 1.5px solid var(--color-border-default, #d8d8d8);
+    margin: 0 0 var(--page-divider-margin-bottom, 13px);
+  }
+
+  // --- Filter toolbar ---
+  &__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-6, 1.5rem);
+    margin-bottom: var(--page-toolbar-margin-bottom, 34px);
+  }
+
+  &__filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__filter-label {
+    font-size: var(--text-sm-size, 15px);
+    font-weight: var(--font-weight-regular, 400);
+    color: var(--filter-label-color, rgb(0 0 0 / 60%));
+  }
+
+  &__filters {
+    display: flex;
+    gap: var(--space-1, 0.25rem);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__filter {
+    appearance: none;
+    padding: 2px 10px;
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: var(--color-bg-muted, #e4e4e4);
+    color: var(--filter-pill-text, #666);
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold, 600);
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+    white-space: nowrap;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    &[hidden] {
+      display: none;
+    }
+
+    &:hover:not(&--active) {
+      background-color: var(--color-bg-subtle, #f0f0f0);
+    }
+
+    &--active {
+      background-color: var(--filter-pill-active-bg, #d6e290);
+      color: var(--filter-pill-active-text, #6e8244);
+    }
+  }
+
+  // --- Grid ---
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+
+    @media (width <= 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width <= 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__loading {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-8);
+  }
+
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--color-text-tertiary);
+    padding: var(--space-8);
+  }
+
+  &__pagination {
+    margin-top: var(--space-6);
+    display: flex;
+    justify-content: center;
+  }
+}

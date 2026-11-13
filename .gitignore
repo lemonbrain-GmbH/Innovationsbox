@@ -1,0 +1,66 @@
+# Ignore composer stuff
+/vendor/
+
+# Ignore concrete5 stuff
+/public/concrete
+/public/application/files/*
+!/public/application/files/.gitignore
+/public/application/authentication/concrete
+/public/application/config/app.php
+
+# Ignore build files
+/public/application/css/main.css
+/public/application/js/main.js
+
+# Ignore developer stuff
+/.idea
+/node_modules
+/.env
+/public/.htpasswd
+auth.json
+/public/application/config/generated_overrides/
+/public/mix-manifest.json
+/build
+/.phpunit.*
+/public/hot
+
+# ignore a lot more since this is for setting it up
+/public/packages/*
+!/public/packages/block_developer
+!/public/packages/lemonbrain_services
+!/public/packages/lemonbrain_webp
+!/public/packages/inno_frontend
+/public/packages/inno_frontend/mix-manifest.json
+!/public/packages/inno_shared
+!/public/packages/inno_project_idea
+!/public/packages/inno_project_space
+!/public/packages/inno_moderation
+!/public/packages/inno_notification
+
+/.travis.yml
+**.LICENSE.txt
+/phpunit.xml.dist
+
+*.sublime-workspace
+*.sublime-project
+.php-cs-fixer.cache
+.phpstan-result-cache/
+.markdownlint.json
+
+/import
+/export
+
+# Playwright MCP snapshots
+.playwright-mcp/
+audit/
+
+test-results
+storybook-static
+.storybook/prerendered.json
+.superpowers/
+.claude/
+
+docs/typst
+
+# Local-only Docker Compose override (not committed)
+docker-compose.test.override.yml

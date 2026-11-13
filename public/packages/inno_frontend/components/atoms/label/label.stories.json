@@ -1,0 +1,14 @@
+{
+  "title": "Atoms/Label",
+  "argTypes": {
+    "text": { "control": "text" },
+    "for": { "control": "text" },
+    "required": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/label" } } },
+    { "name": "Required", "args": { "required": "true" }, "parameters": { "server": { "id": "atoms/label" } } },
+    { "name": "Disabled", "args": { "disabled": "true" }, "parameters": { "server": { "id": "atoms/label" } } }
+  ]
+}

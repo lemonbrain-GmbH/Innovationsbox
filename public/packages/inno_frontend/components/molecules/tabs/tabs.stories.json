@@ -1,0 +1,14 @@
+{
+  "title": "Molecules/Tabs",
+  "argTypes": {
+    "id": { "control": "text" },
+    "activeIndex": { "control": "text" },
+    "variant": { "control": { "type": "select" }, "options": ["line", "pill"] },
+    "ariaLabel": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Line", "parameters": { "server": { "id": "molecules/tabs" } } },
+    { "name": "Pill", "args": { "variant": "pill" }, "parameters": { "server": { "id": "molecules/tabs" } } },
+    { "name": "Second Active", "args": { "activeIndex": "1" }, "parameters": { "server": { "id": "molecules/tabs" } } }
+  ]
+}

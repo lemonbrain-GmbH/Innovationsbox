@@ -1,0 +1,208 @@
+@use "../helper/functions" as f;
+@use "./generated-arrays" as v;
+
+// try tweaking variables in ./variables_css.scss and ./variables.scss before you change something here
+// template uses only 2 values/breakpoints so adjust functions.scss accordingly
+
+// Styles scoped to .ccm-page to avoid leaking into CMS admin UI
+// (previously @import-ed inside .ccm-page {} in main.scss; moved here so @use can be used at top-level)
+.ccm-page {
+  p {
+    @include f.responsive-fluid-multi((
+      font-size: v.$p-font-sizes,
+      line-height: v.$p-line-heights,
+    ));
+
+    font-family: var(--p-font-family, sans-serif);
+    font-weight: var(--p-font-weight, 600);
+    color: var(--p-font-color, #000);
+    margin: f.fluidVal(12, 24) 0;
+  }
+
+  .lead {
+    @include f.responsive-fluid-multi((
+      font-size: v.$lead-font-sizes,
+      line-height: v.$lead-line-heights,
+    ));
+
+    display: block;
+    font-family: var(--lead-font-family, sans-serif);
+    font-weight: var(--lead-font-weight, 600);
+    color: var(--lead-font-color, #000);
+    margin-bottom: f.fluidVal(20, 45);
+  }
+
+  small,
+  p.small,
+  a.small,
+  span.small,
+  time.small {
+    @include f.responsive-fluid-multi((
+      font-size: v.$small-font-sizes,
+      line-height: v.$small-line-heights,
+    ));
+
+    font-family: var(--small-font-family, sans-serif);
+    font-weight: var(--small-font-weight, 600);
+    color: var(--small-font-color, #000);
+  }
+
+  h1,
+  .h1-style {
+    @include f.responsive-fluid-multi((
+      font-size: v.$h1-font-sizes,
+      line-height: v.$h1-line-heights,
+    ));
+
+    font-family: var(--h1-font-family, sans-serif);
+    font-weight: var(--h1-font-weight, 600);
+    color: var(--h1-font-color, #000);
+    margin: f.fluidVal(12, 24) 0 f.fluidVal(6, 12);
+  }
+
+  h2,
+  .h2-style {
+    @include f.responsive-fluid-multi((
+      font-size: v.$h2-font-sizes,
+      line-height: v.$h2-line-heights,
+    ));
+
+    font-family: var(--h2-font-family, sans-serif);
+    font-weight: var(--h2-font-weight, 600);
+    color: var(--h2-font-color, #000);
+    margin: f.fluidVal(12, 24) 0 f.fluidVal(4, 8);
+  }
+
+  h3,
+  .h3-style {
+    @include f.responsive-fluid-multi((
+      font-size: v.$h3-font-sizes,
+      line-height: v.$h3-line-heights,
+    ));
+
+    font-family: var(--h3-font-family, sans-serif);
+    font-weight: var(--h3-font-weight, 600);
+    color: var(--h3-font-color, #000);
+    margin: f.fluidVal(12, 24) 0 f.fluidVal(4, 8);
+  }
+
+  h4,
+  .h4-style {
+    @include f.responsive-fluid-multi((
+      font-size: v.$h4-font-sizes,
+      line-height: v.$h4-line-heights,
+    ));
+
+    font-family: var(--h4-font-family, sans-serif);
+    font-weight: var(--h4-font-weight, 600);
+    color: var(--h4-font-color, #000);
+    margin: f.fluidVal(6, 12) 0;
+  }
+
+  h5,
+  .h5-style {
+    @include f.responsive-fluid-multi((
+      font-size: v.$h5-font-sizes,
+      line-height: v.$h5-line-heights,
+    ));
+
+    font-family: var(--h5-font-family, sans-serif);
+    font-weight: var(--h5-font-weight, 600);
+    color: var(--h5-font-color, #000);
+    margin: f.fluidVal(6, 12) 0;
+  }
+
+  h6,
+  .h6-style {
+    @include f.responsive-fluid-multi((
+      font-size: v.$h6-font-sizes,
+      line-height: v.$h6-line-heights,
+    ));
+
+    font-family: var(--h6-font-family, sans-serif);
+    font-weight: var(--h6-font-weight, 600);
+    color: var(--h6-font-color, #000);
+    margin: f.fluidVal(6, 12) 0;
+  }
+
+  a:not(.button) {
+    @include f.responsive-fluid-multi((
+      font-size: v.$a-font-sizes,
+      line-height: v.$a-line-heights,
+    ));
+
+    font-family: var(--a-font-family, sans-serif);
+    font-weight: var(--a-font-weight, 600);
+    color: var(--a-font-color, #000);
+    text-decoration: var(--a-text-decoration, underline);
+    transition: color var(--transition-time) ease;
+
+    &:hover {
+      text-decoration: var(--a-text-decoration-hover, underline);
+      color: var(--a-font-color-hover, #000);
+    }
+  }
+
+  strong,
+  .bold {
+    font-weight: var(--font-weight-bold, 600);
+  }
+
+  ul:not(.ccm-ui ul, .ccm-ui) {
+    @include f.responsive-fluid-multi((
+      font-size: v.$list-font-sizes,
+      line-height: v.$list-line-heights,
+    ));
+
+    font-family: var(--list-font-family, sans-serif);
+    font-weight: var(--list-font-weight, 300);
+    color: var(--list-font-color, #000);
+    list-style-type: var(--list-style-type, disc);
+    padding-left: 1rem;
+
+    li {
+      position: relative;
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  ol {
+    @include f.responsive-fluid-multi((
+      font-size: v.$list-font-sizes,
+      line-height: v.$list-line-heights,
+    ));
+
+    font-family: var(--list-font-family, sans-serif);
+    font-weight: var(--list-font-weight, 300);
+    color: var(--list-font-color, #000);
+  }
+
+  :where(button:not(:where(.unstyled-button, .fslightboxb, .btn, .button, .rsbtn_tooltoggle)),
+  .button:not(:where(.button--primary, .button--secondary, .button--ghost, .button--danger, .button--accent, .button--muted))) {
+    @include f.responsive-fluid-multi((
+      font-size: v.$button-font-sizes,
+      line-height: v.$button-line-heights,
+    ));
+
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    padding: f.fluidVal(5, 9) 20px;
+    box-shadow: var(--box-shadow);
+    display: inline-block;
+    cursor: pointer;
+    transition: color var(--transition-time) ease,
+      background-color var(--transition-time) ease;
+
+    &:hover {
+      background-color: var(--color-green);
+      color: var(--color-white);
+
+      a {
+        color: var(--color-white);
+      }
+    }
+  }
+}

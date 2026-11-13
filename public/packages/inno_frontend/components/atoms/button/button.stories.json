@@ -1,0 +1,46 @@
+{
+  "title": "Atoms/Button",
+  "argTypes": {
+    "variant": {
+      "control": { "type": "select" },
+      "options": ["primary", "secondary", "ghost", "danger", "accent", "muted", "dark"]
+    },
+    "size": { "control": { "type": "select" }, "options": ["sm", "md", "lg"] },
+    "label": { "control": "text" },
+    "href": { "control": "text" },
+    "type": { "control": { "type": "select" }, "options": ["button", "submit", "reset"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "loading": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "fullWidth": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Primary", "parameters": { "server": { "id": "atoms/button" } } },
+    { "name": "Secondary", "args": { "variant": "secondary" }, "parameters": { "server": { "id": "atoms/button" } } },
+    { "name": "Ghost", "args": { "variant": "ghost" }, "parameters": { "server": { "id": "atoms/button" } } },
+    {
+      "name": "Danger",
+      "args": { "variant": "danger", "label": "Löschen" },
+      "parameters": { "server": { "id": "atoms/button" } }
+    },
+    {
+      "name": "Accent",
+      "args": { "variant": "accent", "label": "Mitmachen" },
+      "parameters": { "server": { "id": "atoms/button" } }
+    },
+    {
+      "name": "Muted",
+      "args": { "variant": "muted", "label": "Mehr erfahren" },
+      "parameters": { "server": { "id": "atoms/button" } }
+    },
+    {
+      "name": "Dark",
+      "args": { "variant": "dark", "label": "Mitmachen" },
+      "parameters": { "server": { "id": "atoms/button" } }
+    },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "atoms/button" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "atoms/button" } } },
+    { "name": "Disabled", "args": { "disabled": "true" }, "parameters": { "server": { "id": "atoms/button" } } },
+    { "name": "Loading", "args": { "loading": "true" }, "parameters": { "server": { "id": "atoms/button" } } },
+    { "name": "Full Width", "args": { "fullWidth": "true" }, "parameters": { "server": { "id": "atoms/button" } } }
+  ]
+}

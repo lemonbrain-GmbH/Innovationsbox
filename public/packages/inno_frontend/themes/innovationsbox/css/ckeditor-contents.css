@@ -1,0 +1,15 @@
+/*
+ * Custom CKEditor iframe styles — overrides the default contents.css
+ * to match the Innovationsbox theme typography.
+ */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  color: #000;
+}
+
+.cke_editable {
+  font-size: 16px;
+  line-height: 1.5;
+}

@@ -1,0 +1,272 @@
+// Edit profile page styles.
+
+@use "../helper/functions" as f;
+@use "../global/_generated-arrays" as t;
+
+// Override Bootstrap alerts rendered by CMS system_errors (shown on account pages)
+.ccm-page main > .alert {
+  max-width: 720px;
+  margin: var(--space-4) auto;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--text-font-family);
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+
+  &.alert-success {
+    background: var(--color-status-success-50);
+    border: 1px solid var(--color-status-success-200);
+    color: var(--color-status-success-700);
+  }
+
+  &.alert-danger {
+    background: var(--color-status-error-50);
+    border: 1px solid var(--color-status-error-200);
+    color: var(--color-status-error-700);
+  }
+
+  &.alert-info {
+    background: var(--color-status-info-50);
+    border: 1px solid var(--color-status-info-200);
+    color: var(--color-status-info-700);
+  }
+
+  .btn-close {
+    order: 1;
+    margin-left: auto;
+    flex-shrink: 0;
+    background: none;
+    box-shadow: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.6;
+    padding: 0;
+    appearance: none;
+
+    &:hover {
+      opacity: 0.6;
+      background: none;
+      box-shadow: none;
+    }
+
+    &::before {
+      content: "\00d7";
+    }
+  }
+}
+
+.edit-profile {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-8);
+
+  &__title {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+
+    .ccm-page & {
+      margin-bottom: var(--space-12);
+    }
+  }
+
+  &__banner,
+  &__feedback {
+    margin-bottom: var(--space-6);
+  }
+
+  &__section {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-6);
+    margin-bottom: var(--space-6);
+
+    &:first-of-type {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+
+  &__section-title {
+    @include f.responsive-fluid("font-size", t.$text-lg-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-lg-line-heights);
+
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  &__attributes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  &__attribute {
+    .ccm-attribute {
+      margin-bottom: 0;
+    }
+
+    // Required indicator for CMS-rendered attributes
+    &--required {
+      label::after,
+      .form-label::after,
+      .control-label::after {
+        content: " *";
+        color: var(--color-status-error-500);
+      }
+    }
+
+    // Style CMS-rendered form labels
+    label,
+    .form-label,
+    .control-label {
+      display: block;
+      font-family: var(--text-font-family);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-900);
+      margin-bottom: var(--space-1);
+    }
+
+    // Style CMS-rendered text/date inputs
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    .form-control {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: var(--text-font-family);
+      color: var(--color-neutral-900);
+      background: var(--color-white);
+      border: 1px solid var(--color-neutral-300);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+
+      &:focus {
+        outline: 2px solid var(--color-action-primary);
+        outline-offset: -1px;
+        border-color: var(--color-action-primary);
+      }
+    }
+
+    // Style CMS-rendered checkboxes
+    .form-check,
+    .ccm-check-list-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) 0;
+
+      input[type="checkbox"],
+      input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--color-action-primary);
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      label {
+        display: inline;
+        font-weight: var(--font-weight-regular);
+        cursor: pointer;
+        margin-bottom: 0;
+      }
+    }
+
+    // Style CMS-rendered select
+    select,
+    .form-select {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: var(--text-font-family);
+      color: var(--color-neutral-900);
+      background: var(--color-white);
+      border: 1px solid var(--color-neutral-300);
+      border-radius: var(--radius-md);
+      padding: var(--space-3) var(--space-4);
+    }
+
+    // Help text
+    .form-text,
+    .help-block {
+      font-size: 12px;
+      color: var(--color-neutral-500);
+      margin-top: var(--space-1);
+    }
+  }
+
+  &__password-accordion {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  &__password-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::marker {
+      display: none;
+      content: "";
+    }
+
+    .edit-profile__section-title {
+      margin-bottom: 0;
+    }
+  }
+
+  &__password-chevron {
+    flex-shrink: 0;
+    color: var(--color-neutral-500);
+    transition: transform 0.2s ease;
+
+    [open] > .edit-profile__password-toggle > & {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__password-content {
+    padding-top: var(--space-4);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-4);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-neutral-200);
+    margin-top: var(--space-2);
+
+    .edit-profile__feedback {
+      width: 100%;
+    }
+  }
+}
+
+// Spacing between form fields within sections
+.edit-profile__section .form-field,
+.edit-profile__section .password-field {
+  margin-bottom: var(--space-4);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

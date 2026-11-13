@@ -1,0 +1,106 @@
+@use "~@helpers/functions" as f;
+
+footer {
+  background-color: var(--footer-bg, rgb(121 105 77 / 70%));
+  padding: var(--footer-padding-top, 35px) 0 var(--footer-padding-bottom, 27px);
+  margin-top: auto;
+
+  .static-content {
+    text-align: left;
+
+    // --- Top row: logos left, CTA buttons right ---
+    .footer__top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: f.fluidVal(16, 24);
+
+      @media (max-width: #{f.$upperBoundTablet-factor}px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-4);
+      }
+    }
+
+    // --- Logos ---
+    .logos {
+      display: flex;
+      justify-content: flex-start;
+      gap: f.fluidVal(16, 32);
+
+      a.logo-link {
+        display: flex;
+        width: f.fluidVal(80, 120);
+
+        img {
+          filter: brightness(0) invert(1);
+        }
+      }
+    }
+
+    // --- CTA buttons ---
+    .footer__cta-row {
+      display: flex;
+      gap: var(--space-3);
+      flex-shrink: 0;
+
+      @media (max-width: #{f.$upperBoundMobile-factor}px) {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+      }
+    }
+
+    // --- Divider ---
+    .footer__divider {
+      border: none;
+      border-top: 1px solid rgb(255 255 255 / 30%);
+      margin: 0 0 f.fluidVal(8, 14);
+    }
+
+    // --- Bottom row: text left, legal links right ---
+    .footer__bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-4);
+
+      @media (max-width: #{f.$upperBoundTablet-factor}px) {
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+    }
+
+    p {
+      color: var(--color-white);
+      font-size: var(--footer-text-font-size, 15px);
+      font-weight: 400;
+      margin: 0;
+    }
+
+    a.footer-link {
+      color: var(--color-white);
+      text-decoration: underline;
+      font-size: inherit;
+      font-weight: inherit;
+
+      &:hover {
+        color: var(--color-white);
+        text-decoration: underline;
+      }
+    }
+
+    // --- Legal links ---
+    .footer__legal {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .footer__legal-sep {
+      color: var(--color-white);
+    }
+  }
+}

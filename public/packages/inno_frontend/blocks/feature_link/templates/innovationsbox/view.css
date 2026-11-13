@@ -1,0 +1,4 @@
+.feature-link {
+  text-align: left;
+  padding-bottom: clamp(32px, 32px + 32 * (100vw - 1200px) / 480, 64px);
+}

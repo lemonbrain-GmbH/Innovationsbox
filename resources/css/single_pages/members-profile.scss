@@ -1,0 +1,156 @@
+// Members public profile page styles.
+
+@use "../helper/functions" as f;
+@use "../global/_generated-arrays" as t;
+
+.member-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+
+  &__back {
+    margin-bottom: var(--space-8);
+
+    .button--ghost {
+      color: var(--color-text-secondary);
+
+      &:hover {
+        background: var(--color-bg-subtle);
+        color: var(--color-text-primary);
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+  }
+
+  &__meta {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    @include f.responsive-fluid("font-size", t.$text-2xl-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-2xl-line-heights);
+
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2);
+    overflow-wrap: break-word;
+  }
+
+  &__role {
+    margin-bottom: var(--space-2);
+  }
+
+  &__joined {
+    @include f.responsive-fluid("font-size", t.$text-sm-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-sm-line-heights);
+
+    color: var(--color-text-secondary);
+    margin-top: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  &__email {
+    @include f.responsive-fluid("font-size", t.$text-sm-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-sm-line-heights);
+
+    margin-bottom: var(--space-4);
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  &__section-title {
+    @include f.responsive-fluid("font-size", t.$text-lg-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-lg-line-heights);
+
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  &__attributes {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+
+  &__attribute-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-8);
+  }
+
+  &__attribute {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  &__attribute-label {
+    @include f.responsive-fluid("font-size", t.$text-xs-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-xs-line-heights);
+
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  &__attribute-value {
+    @include f.responsive-fluid("font-size", t.$text-base-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-base-line-heights);
+
+    color: var(--color-text-primary);
+
+    &--empty {
+      color: var(--color-text-tertiary);
+      font-style: italic;
+    }
+  }
+
+  &__content-item {
+    margin-bottom: var(--space-4);
+  }
+}
+
+// Override global .ccm-page a:not(.button) underline
+.ccm-page .member-profile a:not(.button) {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Responsive: stack on small screens
+@media (width <= 480px) {
+  .member-profile {
+    &__header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__actions {
+      justify-content: center;
+    }
+
+    &__attribute-list {
+      grid-template-columns: 1fr;
+    }
+  }
+}

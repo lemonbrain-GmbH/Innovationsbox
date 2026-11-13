@@ -1,0 +1,20 @@
+.caption {
+  display: inline-block;
+  font-family: var(--text-font-family);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-secondary);
+  font-size: clamp(12px, 12px + 2 * (100vw - 1200px) / 480, 14px);
+  line-height: 1.33;
+
+  &--muted {
+    color: var(--color-text-muted);
+  }
+
+  &--error {
+    color: var(--color-text-error);
+  }
+
+  &--success {
+    color: var(--color-text-success);
+  }
+}

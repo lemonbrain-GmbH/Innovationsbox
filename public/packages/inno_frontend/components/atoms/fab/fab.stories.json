@@ -1,0 +1,9 @@
+{
+  "title": "Atoms/FAB",
+  "stories": [
+    {
+      "name": "Default",
+      "props": {}
+    }
+  ]
+}

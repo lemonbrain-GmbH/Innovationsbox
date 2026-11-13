@@ -1,0 +1,63 @@
+// Members directory page styles.
+
+@use "../helper/functions" as f;
+@use "../global/_generated-arrays" as t;
+
+.members-directory {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+
+  &__header {
+    margin-bottom: var(--space-6);
+  }
+
+  &__title {
+    @include f.responsive-fluid("font-size", t.$text-2xl-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-2xl-line-heights);
+
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: 0;
+  }
+
+  &__search {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+
+    form {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-3);
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .search-bar {
+      flex: 1;
+    }
+  }
+
+  &__search-submit {
+    flex-shrink: 0;
+  }
+
+  &__results {
+    min-height: var(--space-16);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-6);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "title": "Atoms/Skip Link",
+  "argTypes": {
+    "text": { "control": "text" },
+    "target": { "control": "text" }
+  },
+  "stories": [{ "name": "Default", "parameters": { "server": { "id": "atoms/skip-link" } } }]
+}

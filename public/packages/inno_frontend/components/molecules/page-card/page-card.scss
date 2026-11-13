@@ -1,0 +1,25 @@
+@use "~@helpers/functions" as f;
+
+.page-link {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  filter: none;
+  transition: filter var(--transition-time), color var(--transition-time);
+
+  &:hover {
+    filter: sepia(100%);
+  }
+
+  .image {
+    border-radius: var(--border-radius-small);
+    overflow: hidden;
+  }
+
+  .page-link-text {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: f.fluidVal(8, 12);
+  }
+}

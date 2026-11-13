@@ -1,0 +1,110 @@
+.moderation-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+
+  &__header {
+    margin-bottom: var(--space-6);
+
+    h1 {
+      margin-bottom: var(--space-2);
+    }
+
+    p {
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  &__nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-medium, 500);
+    text-decoration: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+
+    &:hover {
+      border-color: var(--color-border-strong);
+      box-shadow: var(--shadow-sm, 0 1px 3px rgb(0 0 0 / 8%));
+      text-decoration: none;
+    }
+  }
+
+  &__nav-icon {
+    display: flex;
+    color: var(--color-text-muted);
+  }
+
+  &__empty {
+    text-align: center;
+    padding: var(--space-8) var(--space-4);
+    color: var(--color-text-muted);
+  }
+}
+
+.moderation-list {
+  &__header {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-bottom: 2px solid var(--color-border);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm, 0.875rem);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__item {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: background-color 0.15s;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-surface-hover, rgb(0 0 0 / 2%));
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary, #06c);
+      outline-offset: -2px;
+    }
+  }
+
+  &__col {
+    &--title {
+      flex: 2;
+      font-weight: var(--font-weight-semibold);
+    }
+
+    &--submitter {
+      flex: 1.5;
+    }
+
+    &--category {
+      flex: 1;
+    }
+
+    &--date {
+      flex: 0 0 100px;
+      text-align: right;
+    }
+  }
+}

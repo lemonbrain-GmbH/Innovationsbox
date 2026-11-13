@@ -1,0 +1,15 @@
+{
+  "title": "Molecules/Breadcrumb",
+  "argTypes": {
+    "separator": { "control": "text" },
+    "ariaLabel": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/breadcrumb" } } },
+    {
+      "name": "Chevron Separator",
+      "args": { "separator": "›" },
+      "parameters": { "server": { "id": "molecules/breadcrumb" } }
+    }
+  ]
+}

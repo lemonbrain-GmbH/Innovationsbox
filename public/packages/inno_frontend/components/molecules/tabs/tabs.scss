@@ -1,0 +1,71 @@
+@use "~@helpers/a11y" as a11y;
+
+.tabs {
+  &__list {
+    display: flex;
+    gap: var(--space-2);
+    border-bottom: 1px solid var(--color-border-default);
+    margin-bottom: var(--space-4);
+  }
+
+  &__tab {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--text-font-family);
+    font-size: 15px;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    position: relative;
+
+    @include a11y.respect-motion {
+      transition: color var(--duration-fast) var(--ease-standard);
+    }
+
+    &:hover:not(:disabled, .tabs__tab--active) {
+      color: var(--color-text-primary);
+    }
+
+    @include a11y.focus-visible-ring;
+
+    &--active {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    &:disabled {
+      color: var(--color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  &--line &__tab--active::after {
+    content: "";
+    position: absolute;
+    left: var(--space-4);
+    right: var(--space-4);
+    bottom: -1px;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: var(--radius-sm);
+  }
+
+  &--pill &__list {
+    border-bottom: none;
+    gap: var(--space-2);
+  }
+
+  &--pill &__tab {
+    border-radius: var(--radius-full);
+
+    &--active {
+      background: var(--color-primary);
+      color: var(--color-text-on-primary, #fff);
+    }
+  }
+
+  &__panel {
+    color: var(--color-text-primary);
+  }
+}

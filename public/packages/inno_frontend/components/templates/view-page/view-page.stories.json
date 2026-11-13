@@ -1,0 +1,19 @@
+{
+  "title": "Templates/View Page",
+  "argTypes": {
+    "heroTitle": { "control": "text" },
+    "heroBody": { "control": "text" },
+    "heroButtonLabel": { "control": "text" },
+    "heroButtonHref": { "control": "text" },
+    "mainContent": { "control": "text" },
+    "footerText": { "control": "text" }
+  },
+  "stories": [
+    { "name": "With Hero and Button", "parameters": { "server": { "id": "templates/view-page" } } },
+    {
+      "name": "Without Button",
+      "args": { "heroButtonLabel": "" },
+      "parameters": { "server": { "id": "templates/view-page" } }
+    }
+  ]
+}

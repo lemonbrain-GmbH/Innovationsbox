@@ -1,0 +1,10 @@
+node_modules
+vendor
+public/packages/*/themes/*/css
+public/packages/*/themes/*/js
+public/packages/*/blocks/*/view.css
+public/packages/*/blocks/*/view.js
+*.min.js
+*.min.css
+package-lock.json
+composer.lock
