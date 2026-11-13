@@ -1,0 +1,10 @@
+// Atom: Heading
+// Base h1-h6 styles live in global/presets.scss; this file adds variants.
+
+.heading--muted {
+  color: var(--color-text-muted);
+}
+
+.heading--inverse {
+  color: var(--color-text-inverse);
+}

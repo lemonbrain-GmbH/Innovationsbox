@@ -1,0 +1,11 @@
+{
+  "title": "Atoms/Overlay",
+  "argTypes": {
+    "variant": { "control": { "type": "select" }, "options": ["light", "dark"] },
+    "content": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Light", "parameters": { "server": { "id": "atoms/overlay" } } },
+    { "name": "Dark", "args": { "variant": "dark" }, "parameters": { "server": { "id": "atoms/overlay" } } }
+  ]
+}

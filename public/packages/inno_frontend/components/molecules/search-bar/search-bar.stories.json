@@ -1,0 +1,30 @@
+{
+  "title": "Molecules/Search Bar",
+  "argTypes": {
+    "id": { "control": "text" },
+    "name": { "control": "text" },
+    "value": { "control": "text" },
+    "placeholder": { "control": "text" },
+    "clearable": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "ariaLabel": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Empty", "parameters": { "server": { "id": "molecules/search-bar" } } },
+    {
+      "name": "With Value",
+      "args": { "value": "Solarenergie" },
+      "parameters": { "server": { "id": "molecules/search-bar" } }
+    },
+    {
+      "name": "Not Clearable",
+      "args": { "value": "Windkraft", "clearable": "false" },
+      "parameters": { "server": { "id": "molecules/search-bar" } }
+    },
+    {
+      "name": "Disabled",
+      "args": { "disabled": "true", "value": "Read-only" },
+      "parameters": { "server": { "id": "molecules/search-bar" } }
+    }
+  ]
+}

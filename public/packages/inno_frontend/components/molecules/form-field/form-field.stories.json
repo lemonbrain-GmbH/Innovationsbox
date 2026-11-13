@@ -1,0 +1,54 @@
+{
+  "title": "Molecules/Form Field",
+  "argTypes": {
+    "label": { "control": "text" },
+    "id": { "control": "text" },
+    "name": { "control": "text" },
+    "type": {
+      "control": { "type": "select" },
+      "options": ["text", "email", "password", "number", "textarea", "select"]
+    },
+    "value": { "control": "text" },
+    "placeholder": { "control": "text" },
+    "hint": { "control": "text" },
+    "error": { "control": "text" },
+    "required": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "rows": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/form-field" } } },
+    {
+      "name": "Required",
+      "args": { "required": "true" },
+      "parameters": { "server": { "id": "molecules/form-field" } }
+    },
+    {
+      "name": "With Error",
+      "args": { "error": "Bitte eine gültige E-Mail eingeben.", "value": "not-an-email" },
+      "parameters": { "server": { "id": "molecules/form-field" } }
+    },
+    { "name": "Without Hint", "args": { "hint": "" }, "parameters": { "server": { "id": "molecules/form-field" } } },
+    {
+      "name": "Disabled",
+      "args": { "disabled": "true", "value": "fixed@example.com" },
+      "parameters": { "server": { "id": "molecules/form-field" } }
+    },
+    {
+      "name": "Textarea",
+      "args": {
+        "type": "textarea",
+        "label": "Beschreibung",
+        "id": "description",
+        "placeholder": "Beschreibe deine Projektidee…",
+        "hint": "Mindestens 50 Zeichen."
+      },
+      "parameters": { "server": { "id": "molecules/form-field" } }
+    },
+    {
+      "name": "Select",
+      "args": { "type": "select", "label": "Land", "id": "country", "placeholder": "Bitte auswählen", "hint": "" },
+      "parameters": { "server": { "id": "molecules/form-field" } }
+    }
+  ]
+}

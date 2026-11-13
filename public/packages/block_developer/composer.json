@@ -1,0 +1,16 @@
+    {
+    "name": "concrete5/block_developer",
+    "description": "Block Developer",
+    "type": "concrete5-package",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "concrete5/core": "^9.2",
+        "twbs/bootstrap": "4.3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Custom\\Space\\": "src"
+        }
+    }
+}

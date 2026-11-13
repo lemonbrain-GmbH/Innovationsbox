@@ -1,0 +1,97 @@
+.modal[open] {
+  display: flex !important;
+  flex-direction: column;
+}
+
+dialog.modal[open]:not(:modal) {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.moderation-detail-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+}
+.moderation-detail-page__back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+.moderation-detail-page__back:hover {
+  color: var(--color-text);
+}
+.moderation-detail-page__idea {
+  margin-bottom: var(--space-6);
+}
+.moderation-detail-page__idea h2 {
+  margin-bottom: var(--space-2);
+}
+.moderation-detail-page__meta {
+  display: flex;
+  gap: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm, 0.875rem);
+  margin-bottom: var(--space-4);
+}
+.moderation-detail-page__description {
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+}
+.moderation-detail-page__description p {
+  margin-bottom: var(--space-2);
+}
+.moderation-detail-page__attachments {
+  margin-top: var(--space-4);
+}
+.moderation-detail-page__attachments h3 {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-base, 1rem);
+}
+.moderation-detail-page__attachment-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.moderation-detail-page__attachment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 4px);
+  color: var(--color-text);
+  text-decoration: none;
+}
+.moderation-detail-page__attachment:hover {
+  background: var(--color-surface-hover, rgba(0, 0, 0, 0.02));
+  text-decoration: none;
+}
+.moderation-detail-page__attachment-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.moderation-detail-page__attachment-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-error, #dc3545);
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0 var(--space-1);
+  flex-shrink: 0;
+}
+.moderation-detail-page__attachment-size {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm, 0.875rem);
+}
+.moderation-detail-page__decision {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-6);
+}
+.moderation-detail-page__approve-form h4, .moderation-detail-page__reject-form h4 {
+  margin-bottom: var(--space-2);
+}

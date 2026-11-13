@@ -1,0 +1,115 @@
+@use "~@helpers/a11y" as a11y;
+
+.fab {
+  position: fixed;
+  bottom: var(--space-6, 24px);
+  right: var(--space-6, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  text-decoration: none !important;
+  z-index: var(--z-dropdown, 1000);
+  width: 67px;
+  height: 67px;
+  transition: width 250ms ease, height 250ms ease;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    width: 96px;
+    height: 82px;
+    text-decoration: none;
+
+    .fab__circle {
+      width: 91px;
+      height: 91px;
+    }
+
+    .fab__content {
+      transform: rotate(12deg);
+    }
+
+    .fab__plus {
+      width: 13.5px;
+      height: 13.5px;
+    }
+
+    .fab__label {
+      opacity: 1;
+      max-height: 30px;
+      margin-top: 4px;
+    }
+  }
+
+  &:active {
+    .fab__circle {
+      transform: scale(0.97);
+    }
+  }
+
+  @include a11y.focus-visible-ring;
+
+  &__circle {
+    position: absolute;
+    width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    background-color: #63753f;
+    filter: drop-shadow(0 4px 15px rgb(0 0 0 / 25%));
+    transition: width 250ms ease, height 250ms ease, transform 250ms ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 250ms ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__plus {
+    width: 32px;
+    height: 32px;
+    display: block;
+    transition: width 250ms ease, height 250ms ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &__label {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 13px;
+    text-align: center;
+    color: #d6e290;
+    text-decoration: none;
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    transition: opacity 250ms ease, max-height 250ms ease, margin-top 250ms ease;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+}

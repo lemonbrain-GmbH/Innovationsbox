@@ -1,0 +1,33 @@
+{
+  "title": "Molecules/Card",
+  "argTypes": {
+    "variant": { "control": { "type": "select" }, "options": ["elevated", "outlined"] },
+    "padding": { "control": { "type": "select" }, "options": ["sm", "md", "lg"] },
+    "clickable": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "href": { "control": "text" },
+    "title": { "control": "text" },
+    "titleLevel": { "control": { "type": "select" }, "options": ["2", "3", "4"] },
+    "subtitle": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Elevated", "parameters": { "server": { "id": "molecules/card" } } },
+    { "name": "Outlined", "args": { "variant": "outlined" }, "parameters": { "server": { "id": "molecules/card" } } },
+    { "name": "Padding Small", "args": { "padding": "sm" }, "parameters": { "server": { "id": "molecules/card" } } },
+    { "name": "Padding Large", "args": { "padding": "lg" }, "parameters": { "server": { "id": "molecules/card" } } },
+    {
+      "name": "Clickable",
+      "args": { "clickable": "true", "href": "#idea-42" },
+      "parameters": { "server": { "id": "molecules/card" } }
+    },
+    {
+      "name": "Title Only",
+      "args": { "subtitle": "", "footer": "" },
+      "parameters": { "server": { "id": "molecules/card" } }
+    },
+    {
+      "name": "Body Only",
+      "args": { "title": "", "subtitle": "", "footer": "" },
+      "parameters": { "server": { "id": "molecules/card" } }
+    }
+  ]
+}

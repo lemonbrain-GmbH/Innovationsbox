@@ -1,0 +1,51 @@
+{
+  "title": "Atoms/Input",
+  "argTypes": {
+    "type": {
+      "control": { "type": "select" },
+      "options": ["text", "email", "password", "number", "search", "tel", "url", "date"]
+    },
+    "id": { "control": "text" },
+    "name": { "control": "text" },
+    "value": { "control": "text" },
+    "placeholder": { "control": "text" },
+    "size": { "control": { "type": "select" }, "options": ["sm", "md", "lg"] },
+    "autocomplete": { "control": "text" },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "required": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "invalid": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "describedBy": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/input" } } },
+    { "name": "Email", "args": { "type": "email" }, "parameters": { "server": { "id": "atoms/input" } } },
+    {
+      "name": "Password",
+      "args": {
+        "type": "password",
+        "value": "secret123",
+        "autocomplete": "current-password",
+        "placeholder": "Passwort"
+      },
+      "parameters": { "server": { "id": "atoms/input" } }
+    },
+    {
+      "name": "Number",
+      "args": { "type": "number", "value": "42", "placeholder": "0" },
+      "parameters": { "server": { "id": "atoms/input" } }
+    },
+    {
+      "name": "Disabled",
+      "args": { "disabled": "true", "value": "fixed@example.com" },
+      "parameters": { "server": { "id": "atoms/input" } }
+    },
+    {
+      "name": "Invalid",
+      "args": { "invalid": "true", "value": "not-an-email" },
+      "parameters": { "server": { "id": "atoms/input" } }
+    },
+    { "name": "Required", "args": { "required": "true" }, "parameters": { "server": { "id": "atoms/input" } } },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "atoms/input" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "atoms/input" } } }
+  ]
+}

@@ -1,0 +1,73 @@
+@use "~@helpers/functions" as f;
+
+.update-teaser {
+  padding-top: f.fluidVal(32, 64);
+  padding-bottom: f.fluidVal(32, 64);
+
+  &__header {
+    margin-bottom: var(--space-4);
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid var(--color-border-default, #d8d8d8);
+    margin: 0;
+  }
+
+  &__list {
+    min-height: 50px;
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-8);
+  }
+
+  &__entry {
+    padding: var(--space-4) 0;
+  }
+
+  &__meta {
+    font-size: 13px;
+    color: var(--color-text-tertiary, #999);
+    margin-bottom: var(--space-2);
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__entry-title {
+    font-weight: var(--font-weight-bold, 700);
+    margin: 0 0 var(--space-2);
+  }
+
+  &__preview {
+    margin: 0;
+    color: var(--color-text-secondary, #666);
+  }
+
+  &__link {
+    flex-shrink: 0;
+    align-self: center;
+  }
+
+  @media (width <= 768px) {
+    &__content {
+      flex-direction: column;
+    }
+
+    &__link {
+      align-self: flex-start;
+    }
+  }
+}

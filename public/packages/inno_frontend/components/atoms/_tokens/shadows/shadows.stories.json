@@ -1,0 +1,4 @@
+{
+  "title": "Tokens/Shadows",
+  "stories": [{ "name": "Shadow Scale", "parameters": { "server": { "id": "atoms/_tokens/shadows" } } }]
+}

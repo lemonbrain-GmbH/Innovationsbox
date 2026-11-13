@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+
+    <table name="btUnsupportedBrowsers">
+        <field name="bID" type="I">
+            <key/>
+            <unsigned/>
+        </field>
+        <field name="description_1" type="X2"></field>
+    </table>
+
+</schema>

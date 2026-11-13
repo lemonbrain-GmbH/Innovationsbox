@@ -1,0 +1,71 @@
+.collaboard-panel {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-4);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  &__iframe-container {
+    margin-top: var(--space-4);
+    border: 2px dashed var(--color-border-default);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+
+  &__iframe-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) var(--space-4);
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  &__iframe-title {
+    font-size: 0.8125rem;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &__iframe-actions {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  &__iframe-newtab {
+    font-size: 0.6875rem;
+    color: var(--color-action-primary);
+    text-decoration: none;
+  }
+
+  &__iframe-close {
+    font-size: 0.6875rem;
+    color: var(--color-text-tertiary);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+  }
+}

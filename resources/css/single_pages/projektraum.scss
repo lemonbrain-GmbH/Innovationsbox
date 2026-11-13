@@ -1,0 +1,278 @@
+@use "../helper/functions" as f;
+@use "../global/_generated-arrays" as t;
+@use "../../../public/packages/inno_frontend/components/molecules/collaboard-item/collaboard-item";
+@use "../../../public/packages/inno_frontend/components/organisms/collaboard-panel/collaboard-panel";
+@use "../../../public/packages/inno_frontend/components/molecules/status-update-entry/status-update-entry";
+@use "../../../public/packages/inno_frontend/components/organisms/status-update-timeline/status-update-timeline";
+@use "../../../public/packages/inno_frontend/components/organisms/project-space-sidebar/project-space-sidebar";
+@use "../../../public/packages/inno_frontend/components/molecules/join-request-card/join-request-card";
+@use "../../../public/packages/inno_frontend/components/molecules/project-card/project-card";
+
+// Override Bootstrap's .modal { display: none } from Atomik theme CSS
+.modal[open] {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  background: var(--color-bg-overlay);
+}
+
+dialog.modal[open]:not(:modal) {
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+}
+
+.projektraum-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4);
+
+  &__back {
+    margin-top: var(--space-8, 2rem);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--space-6);
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border-default);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    margin-bottom: var(--space-6);
+
+    @media (width <= 768px) {
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+  }
+
+  &__header-info {
+    flex: 1;
+  }
+
+  &__status {
+    margin-bottom: var(--space-2);
+  }
+
+  &__title {
+    margin: 0 0 var(--space-2) 0;
+
+    @include f.responsive-fluid("font-size", t.$text-xl-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-xl-line-heights);
+  }
+
+  &__description {
+    margin: 0;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+  }
+
+  &__header-actions {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  &__content {
+    display: flex;
+    gap: var(--space-6);
+
+    @media (width <= 768px) {
+      flex-direction: column;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  &__sidebar {
+    width: 280px;
+    flex-shrink: 0;
+
+    @media (width <= 768px) {
+      width: 100%;
+    }
+  }
+
+  &__join-notice {
+    background: var(--color-bg-subtle);
+    border-left: 3px solid var(--color-action-primary);
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-4);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  &__notice {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+    font-style: italic;
+  }
+
+  &__empty {
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+  }
+}
+
+
+// --- Hero image ---
+
+.projektraum-hero {
+  position: relative;
+  border-radius: var(--radius-lg, 20px);
+  overflow: hidden;
+  aspect-ratio: 390 / 225;
+  margin-bottom: var(--space-6);
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    .projektraum-hero:hover &,
+    .projektraum-hero:focus-within & {
+      opacity: 1;
+    }
+  }
+
+  &__edit,
+  &__remove {
+    gap: var(--space-1);
+  }
+}
+
+.projektraum-hero__add {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+// --- Hero image ---
+
+.project-space-sidebar__member-row .btn--sm {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.idea-attachments-panel {
+  margin-bottom: var(--space-6);
+
+  &__title {
+    font-size: var(--font-size-base, 1rem);
+    margin-bottom: var(--space-3);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm, 4px);
+    color: var(--color-text);
+    text-decoration: none;
+
+    &:hover {
+      background: var(--color-surface-hover, rgb(0 0 0 / 2%));
+      text-decoration: none;
+    }
+  }
+
+  &__size {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm, 0.875rem);
+  }
+}
+
+.file-upload-zone {
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &:hover,
+  &--dragover {
+    border-color: var(--color-primary);
+    background-color: var(--color-surface-hover, rgb(0 0 0 / 2%));
+  }
+
+  &__text {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  &__list {
+    margin-top: var(--space-2);
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm, 4px);
+    margin-bottom: var(--space-1);
+  }
+
+  &__name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__size {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm, 0.875rem);
+    white-space: nowrap;
+  }
+
+  &__remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-error, #dc3545);
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0 var(--space-1);
+  }
+}

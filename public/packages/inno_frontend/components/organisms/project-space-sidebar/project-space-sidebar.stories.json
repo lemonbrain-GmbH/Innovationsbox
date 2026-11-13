@@ -1,0 +1,15 @@
+{
+  "title": "Organisms/Project Space Sidebar",
+  "argTypes": {
+    "initiatorName": { "control": "text" },
+    "canManage": { "control": { "type": "select" }, "options": ["true", "false"] }
+  },
+  "stories": [
+    { "name": "Initiator View", "parameters": { "server": { "id": "organisms/project-space-sidebar" } } },
+    {
+      "name": "Member View",
+      "args": { "canManage": "false" },
+      "parameters": { "server": { "id": "organisms/project-space-sidebar" } }
+    }
+  ]
+}

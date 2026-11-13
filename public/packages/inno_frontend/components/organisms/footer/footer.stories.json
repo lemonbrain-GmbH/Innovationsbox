@@ -1,0 +1,7 @@
+{
+  "title": "Organisms/Footer",
+  "argTypes": {
+    "text": { "control": "text" }
+  },
+  "stories": [{ "name": "Default", "parameters": { "server": { "id": "organisms/footer" } } }]
+}

@@ -1,0 +1,80 @@
+@use "~@helpers/a11y" as a11y;
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--text-font-family);
+  color: var(--color-text-primary);
+
+  &--disabled {
+    cursor: not-allowed;
+    color: var(--color-text-disabled);
+  }
+
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  &__box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border-default);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-surface);
+    flex-shrink: 0;
+
+    @include a11y.respect-motion {
+      transition:
+        background var(--duration-fast) var(--ease-standard),
+        border-color var(--duration-fast) var(--ease-standard);
+    }
+  }
+
+  &__check {
+    width: 14px;
+    height: 14px;
+    color: var(--color-action-primary-text);
+    opacity: 0;
+
+    @include a11y.respect-motion {
+      transition: opacity var(--duration-fast) var(--ease-standard);
+    }
+  }
+
+  &__input:checked + &__box {
+    background: var(--color-action-primary);
+    border-color: var(--color-action-primary);
+  }
+
+  &__input:checked + &__box .checkbox__check {
+    opacity: 1;
+  }
+
+  &__input:focus-visible + &__box {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  &__input[aria-invalid="true"] + &__box {
+    border-color: var(--color-action-danger);
+  }
+
+  &__input:disabled + &__box {
+    background: var(--color-bg-subtle);
+    border-color: var(--color-border-subtle);
+  }
+}

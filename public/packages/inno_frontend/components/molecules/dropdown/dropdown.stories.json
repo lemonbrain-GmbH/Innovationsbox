@@ -1,0 +1,22 @@
+{
+  "title": "Molecules/Dropdown",
+  "argTypes": {
+    "id": { "control": "text" },
+    "triggerLabel": { "control": "text" },
+    "position": { "control": { "type": "select" }, "options": ["bottom-start", "bottom-end", "top-start", "top-end"] },
+    "variant": { "control": { "type": "select" }, "options": ["ghost", "secondary"] }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/dropdown" } } },
+    {
+      "name": "Bottom End",
+      "args": { "position": "bottom-end" },
+      "parameters": { "server": { "id": "molecules/dropdown" } }
+    },
+    {
+      "name": "Secondary Trigger",
+      "args": { "variant": "secondary" },
+      "parameters": { "server": { "id": "molecules/dropdown" } }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "title": "Molecules/Alert",
+  "argTypes": {
+    "variant": { "control": { "type": "select" }, "options": ["info", "success", "warning", "error"] },
+    "title": { "control": "text" },
+    "message": { "control": "text" },
+    "dismissible": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "icon": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Info", "parameters": { "server": { "id": "molecules/alert" } } },
+    {
+      "name": "Success",
+      "args": { "variant": "success", "title": "Erfolg", "message": "Deine Projektidee wurde eingereicht." },
+      "parameters": { "server": { "id": "molecules/alert" } }
+    },
+    {
+      "name": "Warning",
+      "args": { "variant": "warning", "title": "Achtung", "message": "Deine Session läuft in 5 Minuten ab." },
+      "parameters": { "server": { "id": "molecules/alert" } }
+    },
+    {
+      "name": "Error",
+      "args": { "variant": "error", "title": "Fehler", "message": "Die Datei konnte nicht hochgeladen werden." },
+      "parameters": { "server": { "id": "molecules/alert" } }
+    },
+    {
+      "name": "Dismissible",
+      "args": { "dismissible": "true" },
+      "parameters": { "server": { "id": "molecules/alert" } }
+    },
+    { "name": "Without Title", "args": { "title": "" }, "parameters": { "server": { "id": "molecules/alert" } } },
+    { "name": "Without Icon", "args": { "icon": "false" }, "parameters": { "server": { "id": "molecules/alert" } } }
+  ]
+}

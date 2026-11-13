@@ -1,0 +1,9 @@
+{
+  "title": "Molecules/Join Request Card",
+  "argTypes": {
+    "userName": { "control": "text" },
+    "userInitials": { "control": "text" },
+    "requestId": { "control": "text" }
+  },
+  "stories": [{ "name": "Default", "parameters": { "server": { "id": "molecules/join-request-card" } } }]
+}

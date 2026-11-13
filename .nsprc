@@ -1,0 +1,32 @@
+{
+  "//": "Excluded advisories: unfixable upstream deps (@concretecms/bedrock, laravel-mix). Review when upgrading these packages.",
+
+  "//minimist": "Critical – Prototype Pollution in minimist (GHSA-vh95-rmgr-6w4m, GHSA-xvch-5gv4-984h). Chain: @concretecms/bedrock → selectize → sifter → optimist → minimist. Build-time only; not reachable from browser or HTTP path. Upstream fix blocked by @concretecms/bedrock. Revisit when bedrock releases a newer selectize.",
+  "GHSA-vh95-rmgr-6w4m": "minimist via @concretecms/bedrock → selectize chain (build-time only, no runtime exposure)",
+  "GHSA-xvch-5gv4-984h": "minimist via @concretecms/bedrock → selectize chain (build-time only, no runtime exposure)",
+
+  "//elliptic": "Low – Elliptic risky cryptographic primitive (GHSA-848j-6mm2-7j84). Chain: laravel-mix → node-libs-browser → crypto-browserify → elliptic. Build-tool only; never shipped to the browser. No fix available upstream.",
+  "GHSA-848j-6mx2-7j84": "elliptic via laravel-mix → node-libs-browser (build-time only, no fix available)",
+
+  "//webpack-dev-server": "Moderate – webpack-dev-server source-code exposure (GHSA-4v9v-hfq4-rm2v, GHSA-9jgg-88mc-972h, GHSA-79cf-xcqc-c78w). Dev-server is never exposed in production; CI pipeline uses `npm run production` (no dev-server). Mitigated by firewall / localhost-only binding. Blocked by laravel-mix@6 lock on older webpack-dev-server.",
+  "GHSA-4v9v-hfq4-rm2v": "webpack-dev-server via laravel-mix (dev-only, no fix available)",
+  "GHSA-9jgg-88mc-972h": "webpack-dev-server via laravel-mix (dev-only, no fix available)",
+  "GHSA-79cf-xcqc-c78w": "webpack-dev-server cross-origin source exposure via laravel-mix (dev-only, no fix available)",
+
+  "//ckeditor4": "Moderate – Multiple CKEditor4 XSS advisories (GHSA-wh5w-82f3-wrxh, GHSA-mw2c-vx6j-mg76, GHSA-fq6h-4g8v-qqvm, GHSA-6v96-m24v-f58j, GHSA-7r32-vfj5-c2jv). CKEditor4 is a transitive dep of @concretecms/bedrock (CMS editor). Custom code in inno_frontend does not import or instantiate CKEditor. Affected samples/AJAX endpoints are not deployed in custom packages. Upgrade path blocked by bedrock; track ConcreteCMS upstream for CKEditor5 migration.",
+  "GHSA-wh5w-82f3-wrxh": "ckeditor4 XSS in AJAX sample via @concretecms/bedrock (CMS upstream, not in custom code)",
+  "GHSA-mw2c-vx6j-mg76": "ckeditor4 XSS in preview feature via @concretecms/bedrock (CMS upstream, not in custom code)",
+  "GHSA-fq6h-4g8v-qqvm": "ckeditor4 XSS via incorrect CDATA detection via @concretecms/bedrock (CMS upstream)",
+  "GHSA-6v96-m24v-f58j": "ckeditor4 XSS via domain takeover via @concretecms/bedrock (CMS upstream)",
+  "GHSA-7r32-vfj5-c2jv": "ckeditor4 GeSHi plugin XSS via @concretecms/bedrock (CMS upstream, not deployed)",
+
+  "//bootstrap3": "Moderate – Bootstrap 3 Popover/Tooltip XSS (GHSA-q58r-hwc8-rm9j, GHSA-vxmc-5x29-h64v). Bootstrap 3 is bundled inside pnotify (a sub-dep of @concretecms/bedrock). Custom inno_frontend code has its own CSS-only Tooltip atom (no Bootstrap JS, no data-* attribute plugins). Bootstrap 3 Popover/Tooltip JS are never called in custom code. Upgrade blocked by pnotify@5 pinning.",
+  "GHSA-q58r-hwc8-rm9j": "Bootstrap 3 Popover/Tooltip XSS via pnotify inside @concretecms/bedrock (custom code uses CSS-only tooltip, no Bootstrap JS)",
+  "GHSA-vxmc-5x29-h64v": "Bootstrap 3 data-* XSS via pnotify inside @concretecms/bedrock (custom code uses CSS-only tooltip, no Bootstrap JS)",
+
+  "//uuid": "Moderate – uuid buffer bounds check (GHSA-w5hq-g745-h8pq). Affects uuid < 11.1.1. Two paths: @storybook/addon-actions (dev/build-time Storybook only) and webpack-dev-server → sockjs (dev-time only). No runtime exposure. No fix available without major Storybook or laravel-mix upgrade.",
+  "GHSA-w5hq-g745-h8pq": "uuid bounds check via @storybook/addon-actions and webpack-dev-server/sockjs (dev/build-time only, no fix available)",
+
+  "//vue2": "Low – Vue 2 ReDoS via parseHTML (GHSA-5j4c-8p2g-v4jx). Vue 2 is a transitive dep of @concretecms/bedrock; custom code does not use Vue. Vue 2 is EOL; bedrock upgrade to Vue 3 is tracked upstream. Input to parseHTML in CMS admin is already gated behind authentication and editor sanitisation.",
+  "GHSA-5j4c-8p2g-v4jx": "Vue 2 ReDoS via @concretecms/bedrock (admin-only, authenticated users, Vue3 migration tracked upstream)"
+}

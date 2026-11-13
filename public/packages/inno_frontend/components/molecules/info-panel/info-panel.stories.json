@@ -1,0 +1,16 @@
+{
+  "title": "Molecules/Info Panel",
+  "argTypes": {
+    "imageSrc": { "control": "text" },
+    "imageAlt": { "control": "text" },
+    "content": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "molecules/info-panel" } } },
+    {
+      "name": "Without Image",
+      "args": { "imageSrc": "" },
+      "parameters": { "server": { "id": "molecules/info-panel" } }
+    }
+  ]
+}

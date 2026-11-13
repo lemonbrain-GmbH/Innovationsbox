@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.accent {
+  position: relative;
+  display: block;
+  width: 80%;
+  margin-left: 10%;
+  text-align: center;
+}
+.accent::before {
+  content: "«";
+  display: block;
+  color: var(--color-primary);
+  font-size: clamp(48px, 48px + 48 * (100vw - 1200px) / 480, 96px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.accent::after {
+  content: "»";
+  display: block;
+  color: var(--color-primary);
+  font-size: clamp(48px, 48px + 48 * (100vw - 1200px) / 480, 96px);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.question {
+  position: relative;
+  display: block;
+}
+.question::before {
+  content: "?";
+  display: block;
+  color: var(--color-primary);
+  font-size: clamp(48px, 48px + 48 * (100vw - 1200px) / 480, 96px);
+  position: absolute;
+  font-weight: bold;
+  top: 0;
+  left: -1rem;
+  z-index: -1;
+}

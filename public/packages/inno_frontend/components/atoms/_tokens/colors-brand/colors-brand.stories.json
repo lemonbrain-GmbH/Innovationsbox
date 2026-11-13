@@ -1,0 +1,4 @@
+{
+  "title": "Tokens/Colors/Brand",
+  "stories": [{ "name": "Brand Scales", "parameters": { "server": { "id": "atoms/_tokens/colors-brand" } } }]
+}

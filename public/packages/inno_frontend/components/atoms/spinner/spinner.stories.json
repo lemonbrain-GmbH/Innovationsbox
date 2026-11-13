@@ -1,0 +1,13 @@
+{
+  "title": "Atoms/Spinner",
+  "argTypes": {
+    "size": { "control": { "type": "select" }, "options": ["xs", "sm", "md", "lg", "xl"] },
+    "label": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Default", "parameters": { "server": { "id": "atoms/spinner" } } },
+    { "name": "Small", "args": { "size": "sm" }, "parameters": { "server": { "id": "atoms/spinner" } } },
+    { "name": "Large", "args": { "size": "lg" }, "parameters": { "server": { "id": "atoms/spinner" } } },
+    { "name": "XL", "args": { "size": "xl" }, "parameters": { "server": { "id": "atoms/spinner" } } }
+  ]
+}

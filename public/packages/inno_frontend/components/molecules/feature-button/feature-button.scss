@@ -1,0 +1,6 @@
+@use "~@helpers/functions" as f;
+
+.feature-link {
+  text-align: left;
+  padding-bottom: f.fluidVal(32, 64);
+}

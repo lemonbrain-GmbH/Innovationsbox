@@ -1,0 +1,105 @@
+@use "~@helpers/functions" as f;
+@use "~@global/_generated-arrays" as t;
+
+.auth-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-6);
+
+  &__background {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--color-brand-primary-50) 0%,
+      var(--color-brand-primary-100) 50%,
+      var(--color-neutral-50) 100%
+    );
+    z-index: -1;
+  }
+
+  &__card {
+    width: 100%;
+    max-width: 440px;
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-8);
+  }
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  &__logo-mark {
+    width: 48px;
+    height: 48px;
+    background: var(--color-brand-primary-600);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-weight: var(--font-weight-bold);
+
+    @include f.responsive-fluid("font-size", t.$text-lg-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-lg-line-heights);
+  }
+
+  &__logo-text {
+    font-weight: var(--font-weight-semibold);
+
+    @include f.responsive-fluid("font-size", t.$text-base-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-base-line-heights);
+
+    color: var(--color-text-primary);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: var(--space-6);
+  }
+
+  &__title {
+    @include f.responsive-fluid("font-size", t.$text-xl-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-xl-line-heights);
+
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  &__subtitle {
+    @include f.responsive-fluid("font-size", t.$text-sm-font-sizes);
+    @include f.responsive-fluid("line-height", t.$text-sm-line-heights);
+
+    color: var(--color-text-secondary);
+    margin: var(--space-1) 0 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  @media (width <= 480px) {
+    padding: var(--space-4);
+
+    &__background {
+      background: var(--color-bg-surface);
+    }
+
+    &__card {
+      box-shadow: none;
+      padding: var(--space-6);
+    }
+  }
+}

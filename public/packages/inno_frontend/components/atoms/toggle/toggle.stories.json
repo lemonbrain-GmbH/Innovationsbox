@@ -1,0 +1,24 @@
+{
+  "title": "Atoms/Toggle",
+  "argTypes": {
+    "id": { "control": "text" },
+    "name": { "control": "text" },
+    "value": { "control": "text" },
+    "label": { "control": "text" },
+    "checked": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "disabled": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "required": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "invalid": { "control": { "type": "select" }, "options": ["true", "false"] },
+    "describedBy": { "control": "text" }
+  },
+  "stories": [
+    { "name": "Off", "parameters": { "server": { "id": "atoms/toggle" } } },
+    { "name": "On", "args": { "checked": "true" }, "parameters": { "server": { "id": "atoms/toggle" } } },
+    { "name": "Disabled", "args": { "disabled": "true" }, "parameters": { "server": { "id": "atoms/toggle" } } },
+    {
+      "name": "Disabled On",
+      "args": { "disabled": "true", "checked": "true" },
+      "parameters": { "server": { "id": "atoms/toggle" } }
+    }
+  ]
+}

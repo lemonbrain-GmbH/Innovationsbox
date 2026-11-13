@@ -1,0 +1,4 @@
+{
+  "title": "Tokens/Colors/Status",
+  "stories": [{ "name": "Status Scales", "parameters": { "server": { "id": "atoms/_tokens/colors-status" } } }]
+}

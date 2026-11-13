@@ -1,0 +1,174 @@
+.accept-cookies-wrapper {
+  --accept-cookies-hint-background-color: #006e58;
+  --accept-cookies-link-on-hover-color: #f2b30d;
+  --accept-cookies-save-button-hover-color: #4689B3;
+  --accept-cookies-save-button-color: #084469;
+  --accept-cookies-cancel-button-color: #c8c8c8;
+
+  position: relative;
+  z-index: 999;
+
+  .text-container,
+  .buttons {
+    width: 90%;
+    max-width: 1140px;
+    margin: auto;
+  }
+
+  .hint {
+    background-color: var(--primary-theme-color, var(--accept-cookies-hint-background-color));
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    * {
+      color: #fff;
+    }
+
+    a {
+      text-decoration: underline;
+      &:hover {
+        color: var(--secondary-theme-color, var(--accept-cookies-link-on-hover-color));
+      }
+    }
+
+    .close {
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      z-index: 999;
+      opacity: 1;
+      transition: 0.3s ease;
+      transition-property: border-color, background-color, color;
+
+      @media (max-width: 1199.98px) {
+        top: 15px;
+        right: 15px;
+      }
+
+      i.icon {
+        font-size: 2rem;
+        color: #fff ;
+        text-shadow: none;
+      }
+
+      &:hover {
+        opacity: 1;
+
+        i.icon {
+          color: var(--secondary-theme-color, var(--accept-cookies-link-on-hover-color));
+        }
+      }
+    }
+  }
+
+  .backdrop {
+    display: none;
+    background-color: rgba(51, 51, 51, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+  }
+
+  .popup {
+    position: fixed;
+    z-index: 1001;
+    left: 50%;
+    margin-left: -1000px / 2;
+    bottom: 7vh;
+    width: 1000px;
+    background-color: white;
+
+    @media (max-width: 1199.98px) {
+      width: auto;
+      bottom: 17vh;
+      margin-left: 0;
+      left: 0;
+      right: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .text-container {
+      padding: 30px;
+      max-height: 85vh;
+      overflow-y: auto;
+
+      @media (max-width: 1199.98px) {
+        max-height: 65vh;
+        padding: 15px;
+      }
+
+      h5,
+      p {
+        padding-left: 5px;
+        color: #000;
+      }
+
+      h5 {
+        padding-top: 2px;
+      }
+
+      .form-check-input {
+        margin-left: 0.3rem;
+      }
+
+      .form-check-label {
+          margin-left: 1.5rem;
+      }
+
+    }
+
+    .buttons {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 30px;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .header-button {
+      flex: 1 1 50%;
+      color: white;
+      text-align: center;
+      display: inline-block;
+      width: 100%;
+      padding: 10px 15px;
+      margin-top: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s ease;
+      transition-property: all;
+      transition-property: background-color, color;
+
+      &.save {
+        background-color: var(--secondary-theme-color, var(--accept-cookies-save-button-color));
+        &:hover, &:active {
+          background-color: var(--primary-theme-color, var(--accept-cookies-save-button-hover-color));
+        }
+      }
+      &.cancel {
+        color: var(--accept-cookies-cancel-button-color);
+        border: 2px solid var(--accept-cookies-cancel-button-color);
+        background-color: transparent;
+        &:hover, &:active {
+          color: black;
+          border-color: var(--accept-cookies-cancel-button-color);
+          background-color: var(--accept-cookies-cancel-button-color);
+        }
+      }
+    }
+  }
+}

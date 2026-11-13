@@ -1,0 +1,92 @@
+.members-directory {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+.members-directory__header {
+  margin-bottom: var(--space-6);
+}
+.members-directory__title {
+  font-size: 24px;
+}
+@media (min-width: 480px) {
+  .members-directory__title {
+    font-size: clamp(24px, 14px + 2.0833333333vw, 30px);
+  }
+}
+@media (min-width: 768px) {
+  .members-directory__title {
+    font-size: clamp(30px, 21.1111111111px + 1.1574074074vw, 35px);
+  }
+}
+@media (min-width: 1200px) {
+  .members-directory__title {
+    font-size: clamp(35px, 22.5px + 1.0416666667vw, 40px);
+  }
+}
+@media (min-width: 1680px) {
+  .members-directory__title {
+    font-size: 40px;
+  }
+}
+.members-directory__title {
+  line-height: 30px;
+}
+@media (min-width: 480px) {
+  .members-directory__title {
+    line-height: clamp(30px, 20px + 2.0833333333vw, 36px);
+  }
+}
+@media (min-width: 768px) {
+  .members-directory__title {
+    line-height: clamp(36px, 25.3333333333px + 1.3888888889vw, 42px);
+  }
+}
+@media (min-width: 1200px) {
+  .members-directory__title {
+    line-height: clamp(42px, 27px + 1.25vw, 48px);
+  }
+}
+@media (min-width: 1680px) {
+  .members-directory__title {
+    line-height: 48px;
+  }
+}
+.members-directory__title {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+}
+.members-directory__search {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+.members-directory__search form {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 560px;
+}
+.members-directory__search .search-bar {
+  flex: 1;
+}
+.members-directory__search-submit {
+  flex-shrink: 0;
+}
+.members-directory__results {
+  min-height: var(--space-16);
+}
+.members-directory__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+.members-directory__pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-6);
+}

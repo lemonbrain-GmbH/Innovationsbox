@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<concrete5-cif version="1.0">
+
+    <tasks>
+        <task handle="display_debug_errors" package="lemonbrain_services"/>
+    </tasks>
+    <tasksets>
+        <taskset handle="lemonbrain_services_tasks" name="Lemonbrain Services Tasks" package="lemonbrain_services">
+            <task handle="display_debug_errors"/>
+        </taskset>
+    </tasksets>
+
+</concrete5-cif>
